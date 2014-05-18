@@ -1,6 +1,8 @@
 ﻿#region Usings
 
 using System.ComponentModel.Composition;
+using System.Globalization;
+using System.Threading;
 using PuppyFramework.Interfaces;
 
 #endregion
@@ -24,6 +26,17 @@ namespace PuppyFramework.UI
         public PuppyShell()
         {
             InitializeComponent();
+#if DEBUG_NP
+            SetCultureInfo(new CultureInfo("ne-NP"));
+#else
+            SetCultureInfo();
+#endif
+        }
+
+        public void SetCultureInfo(CultureInfo cultureInfo = null)
+        {
+            Thread.CurrentThread.CurrentCulture = cultureInfo ?? CultureInfo.CurrentCulture;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo ?? CultureInfo.CurrentCulture;
         }
 
         #endregion

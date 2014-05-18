@@ -1,21 +1,22 @@
 ﻿#region Usings
 
+using System.ComponentModel.Composition;
+using Puppy.Sample.ResourceSatellite.Properties;
 using PuppyFramework.Interfaces;
 using PuppyFramework.ViewModels;
-using System.ComponentModel.Composition;
 
 #endregion
 
 namespace Puppy.Sample.ViewModel
 {
-    [Export(typeof(IPuppyShellViewModel))]
+    [Export(typeof (IPuppyShellViewModel))]
     internal class SampleShellViewModel : PuppyShellViewModel
     {
-        #region Constructors
+        #region Properties
 
-        public SampleShellViewModel()
+        public override string Title
         {
-            Title = "Sample Puppy";
+            get { return Resources._appTitle; }
         }
 
         #endregion

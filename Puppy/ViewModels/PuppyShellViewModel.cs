@@ -3,6 +3,7 @@
 using Microsoft.Practices.Prism.Mvvm;
 using PuppyFramework.Interfaces;
 using System.ComponentModel.Composition;
+using PuppyFramework.Properties;
 
 #endregion
 
@@ -21,11 +22,8 @@ namespace PuppyFramework.ViewModels
 
         public virtual string Title
         {
-            get { return _title ?? "Puppy"; }
-            protected set
-            {
-                SetProperty(ref _title, value);
-            }
+            get { return _title ?? Resources._appTitle; }
+            protected set { SetProperty(ref _title, value); }
         }
 
         #endregion

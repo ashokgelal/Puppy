@@ -51,6 +51,7 @@ namespace PuppyFramework.Bootstrap
 
         private BootstrapConfig ReadConfigFromApplicationSettings()
         {
+            // todo: return valid config
             return new BootstrapConfig();
         }
 

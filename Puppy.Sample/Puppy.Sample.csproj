@@ -33,6 +33,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugNP|AnyCPU'">
+    <OutputPath>bin\DebugNP\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUG_NP</DefineConstants>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.Composition">
       <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
@@ -113,6 +118,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Puppy.Sample.ResourceSatellite\Puppy.Sample.ResourceSatellite.csproj">
+      <Project>{ce4fd45f-de8d-4fc5-a34c-68f4eab91693}</Project>
+      <Name>Puppy.Sample.ResourceSatellite</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Puppy\Puppy.csproj">
       <Project>{4846c908-43ff-4b93-a82a-8f424894e18b}</Project>
       <Name>Puppy</Name>
