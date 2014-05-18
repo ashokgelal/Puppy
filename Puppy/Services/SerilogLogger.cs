@@ -13,10 +13,11 @@ namespace PuppyFramework.Services
 
         public SerilogLogger(LoggerConfiguration loggerConfiguration = null)
         {
-            var config = loggerConfiguration ?? new LoggerConfiguration().WriteTo.ColoredConsole();
+            var config = loggerConfiguration
+                         ?? new LoggerConfiguration().WriteTo.ColoredConsole().ReadAppSettings();
             Serilog.Log.Logger = config.CreateLogger();
             var message = loggerConfiguration == null ? "default built-in" : "user defined";
-            Serilog.Log.Information("Serilog Logger has been configured with {Message:1} settings", message);
+            Serilog.Log.Information("Serilog Logger has been configured with {Message:l} settings", message);
         }
 
         #endregion

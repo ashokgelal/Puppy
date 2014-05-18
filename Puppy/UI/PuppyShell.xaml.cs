@@ -1,9 +1,9 @@
 ﻿#region Usings
 
+using PuppyFramework.Interfaces;
 using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Threading;
-using PuppyFramework.Interfaces;
 
 #endregion
 
@@ -32,6 +32,10 @@ namespace PuppyFramework.UI
             SetCultureInfo();
 #endif
         }
+
+        #endregion
+
+        #region Methods
 
         public void SetCultureInfo(CultureInfo cultureInfo = null)
         {
