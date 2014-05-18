@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30324.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puppy", "Puppy\Puppy.csproj", "{4846C908-43FF-4B93-A82A-8F424894E18B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puppy.Sample", "Puppy.Sample\Puppy.Sample.csproj", "{A8DDB159-095B-4A70-8819-BC9E389EB41D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{4846C908-43FF-4B93-A82A-8F424894E18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4846C908-43FF-4B93-A82A-8F424894E18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4846C908-43FF-4B93-A82A-8F424894E18B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8DDB159-095B-4A70-8819-BC9E389EB41D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8DDB159-095B-4A70-8819-BC9E389EB41D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8DDB159-095B-4A70-8819-BC9E389EB41D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8DDB159-095B-4A70-8819-BC9E389EB41D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
