@@ -70,11 +70,20 @@ namespace PuppyFramework.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This method is not allowed. Use Run(BootstrapConfig) method instead..
+        ///   Looks up a localized string similar to This method is not allowed. Use Run(RunstrapConfig) method instead..
         /// </summary>
-        internal static string _invalidRunOperation {
+        internal static string _invalidRunOperationException {
             get {
-                return ResourceManager.GetString("_invalidRunOperation", resourceCulture);
+                return ResourceManager.GetString("_invalidRunOperationException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ShellView must a subclass of Window..
+        /// </summary>
+        internal static string _invalidShellTypeException {
+            get {
+                return ResourceManager.GetString("_invalidShellTypeException", resourceCulture);
             }
         }
     }

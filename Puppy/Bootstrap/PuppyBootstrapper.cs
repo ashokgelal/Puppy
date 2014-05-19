@@ -1,11 +1,5 @@
 ﻿#region Usings
 
-using System;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.Configuration;
-using System.Reflection;
-using System.Windows;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.MefExtensions;
 using PuppyFramework.Helpers;
@@ -14,6 +8,12 @@ using PuppyFramework.Properties;
 using PuppyFramework.Services;
 using PuppyFramework.UI;
 using PuppyFramework.ViewModels;
+using System;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.Configuration;
+using System.Reflection;
+using System.Windows;
 
 #endregion
 
@@ -35,29 +35,33 @@ namespace PuppyFramework.Bootstrap
 
         #endregion
 
+        #region Constructors
+
         public PuppyBootstrapper()
         {
-            var assembly = Assembly.GetAssembly(typeof (PuppyBootstrapper)).GetName();
+            var assembly = Assembly.GetAssembly(typeof(PuppyBootstrapper)).GetName();
             _assemblyName = assembly.Name;
             _version = assembly.Version.ToString();
         }
 
-        #region Methods
+        #endregion
 
-        protected override void ConfigureContainer()
-        {
-            Container.ComposeExportedValue<ILogger>(_logger);
-            base.ConfigureContainer();
-        }
+        #region Methods
 
         protected override void ConfigureAggregateCatalog()
         {
-            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof (PuppyBootstrapper).Assembly));
+            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(PuppyBootstrapper).Assembly));
             var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly != null)
             {
                 AggregateCatalog.Catalogs.Add(new AssemblyCatalog(entryAssembly));
             }
+        }
+
+        protected override void ConfigureContainer()
+        {
+            Container.ComposeExportedValue<ILogger>(_logger);
+            base.ConfigureContainer();
         }
 
         protected override ILoggerFacade CreateLogger()
@@ -69,7 +73,13 @@ namespace PuppyFramework.Bootstrap
 
         protected override DependencyObject CreateShell()
         {
-            return Container.GetExportedValue<PuppyShell>();
+            var customShell = Container.GetExportedValueOrDefault<IPuppyShellView>();
+            var shell = (customShell ?? Container.GetExportedValue<PuppyShell>()) as Window;
+            if (shell == null)
+            {
+                throw new InvalidCastException(Resources._invalidShellTypeException);
+            }
+            return shell;
         }
 
         private T GetAppSetting<T>(string key, T defaultValue = default(T))
@@ -89,11 +99,11 @@ namespace PuppyFramework.Bootstrap
         protected override void InitializeShell()
         {
             base.InitializeShell();
-            var shell = (PuppyShell) Shell;
+            var shell = ((IPuppyShellView)Shell);
             shell.ViewModel = Container.GetExportedValueOrDefault<IPuppyShellViewModel>()
                               ?? Container.GetExportedValue<PuppyShellViewModel>();
-            _logger.Log(string.Format("Initialized {0}", shell.GetType().Name), Category.Info);
             shell.Show();
+            _logger.Log(string.Format("Initialized {0}", shell.GetType().Name), Category.Info);
         }
 
         private BootstrapConfig ReadConfigFromApplicationSettings()
@@ -125,7 +135,7 @@ namespace PuppyFramework.Bootstrap
 
         public override void Run(bool registerDefaultPrismServices)
         {
-            throw new InvalidOperationException(Resources._invalidRunOperation);
+            throw new InvalidOperationException(Resources._invalidRunOperationException);
         }
 
         #endregion

@@ -9,8 +9,8 @@ using System.Threading;
 
 namespace PuppyFramework.UI
 {
-    [Export]
-    public partial class PuppyShell
+    [Export(typeof(PuppyShell))]
+    public partial class PuppyShell : IPuppyShellView
     {
         #region Properties
 

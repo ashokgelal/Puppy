@@ -4,6 +4,8 @@ namespace PuppyFramework.Interfaces
 {
     public interface IPuppyShellView
     {
+        void Show();
+        IPuppyShellViewModel ViewModel { set; }
     }
 
     public interface IPuppyShellViewModel
