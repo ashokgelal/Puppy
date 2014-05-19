@@ -1,26 +1,24 @@
 ﻿#region Usings
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PuppyFramework.Bootstrap;
 using System;
+using Xunit;
 
 #endregion
 
 namespace Puppy.Tests.Bootstrap
 {
-    [TestClass]
     public class BootstrapperTest
     {
         #region Methods
 
-        [ExpectedException(typeof(InvalidOperationException))]
-        [TestMethod]
+        [Fact]
         public void TestDefaultRunMethod()
         {
-            new TestBootstrapper().Run(true);
+            Assert.Throws<InvalidOperationException>(() => new TestBootstrapper().Run(true));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestRunWithCustomConfig()
         {
             var config = new BootstrapConfig
@@ -30,29 +28,17 @@ namespace Puppy.Tests.Bootstrap
             };
             var bootstrapper = new TestBootstrapper();
             bootstrapper.Run(config);
-            Assert.IsFalse(bootstrapper.BootstrapConfig.EnableMenuService);
-            Assert.IsTrue(bootstrapper.BootstrapConfig.EnableUpdaterService);
+            Assert.False(bootstrapper.BootstrapConfig.EnableMenuService);
+            Assert.True(bootstrapper.BootstrapConfig.EnableUpdaterService);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestRunWithDefaultConfig()
         {
             var bootstrapper = new TestBootstrapper();
             bootstrapper.Run();
-            Assert.IsTrue(bootstrapper.BootstrapConfig.EnableMenuService);
-            Assert.IsFalse(bootstrapper.BootstrapConfig.EnableUpdaterService);
-        }
-
-        #endregion
-    }
-
-    internal class TestBootstrapper : PuppyBootstrapper
-    {
-        #region Methods
-
-        protected override void InitializeShell()
-        {
-            // do nothing
+            Assert.True(bootstrapper.BootstrapConfig.EnableMenuService);
+            Assert.False(bootstrapper.BootstrapConfig.EnableUpdaterService);
         }
 
         #endregion
