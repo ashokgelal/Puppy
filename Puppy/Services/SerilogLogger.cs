@@ -34,7 +34,7 @@ namespace PuppyFramework.Services
 
         #region Methods
 
-        public void Log(string message, Category category, Priority priority = Priority.Medium)
+        public void Log(string message, Category category, Priority priority)
         {
             Log(message, category, _defaultLogSource);
         }
