@@ -3,10 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:PuppyFramework.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:prism="http://www.codeplex.com/prism"
+        mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:PuppyShellViewModel}"
         Title="{Binding Title}" Height="350" Width="525">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <prism:InvokeCommandAction Command="{Binding AppClosingCommand}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Loaded">
+            <prism:InvokeCommandAction Command="{Binding AppLoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
     </Grid>
 </Window>
