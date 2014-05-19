@@ -30,8 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugNP|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\DebugNP\</OutputPath>
     <DefineConstants>TRACE;DEBUG;DEBUG_NP</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.Composition">
@@ -74,6 +79,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -86,7 +92,9 @@
   <ItemGroup>
     <Compile Include="Bootstrap\BootstrapConfig.cs" />
     <Compile Include="Bootstrap\PuppyBootstrapper.cs" />
+    <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Interfaces\PuppyInterfaces.cs" />
+    <Compile Include="MagicStrings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

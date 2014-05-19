@@ -14,6 +14,11 @@ namespace Puppy.Sample.ViewModel
     {
         #region Properties
 
+        [ImportingConstructor]
+        public SampleShellViewModel(ILogger logger) : base(logger)
+        {
+        }
+
         public override string Title
         {
             get { return Resources._appTitle; }

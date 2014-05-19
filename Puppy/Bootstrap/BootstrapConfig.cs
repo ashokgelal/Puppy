@@ -6,9 +6,9 @@
 
         public bool EnableMenuService { get; set; }
 
-        public bool EnableSoftwareUpdater { get; set; }
+        public bool EnableUpdaterService { get; set; }
 
-        public bool RunWithDefaultConfig { get; set; }
+        public bool RegisterDefaultPrismServices { get; set; }
 
         #endregion
 
@@ -16,14 +16,21 @@
 
         public BootstrapConfig()
         {
-            RunWithDefaultConfig = true;
+            RegisterDefaultPrismServices = true;
+            EnableUpdaterService = false;
         }
 
         #endregion
 
-        public void Boot()
+        #region Methods
+
+        public PuppyBootstrapper Boot()
         {
-            new PuppyBootstrapper().Run(this);
+            var bootstrapper = new PuppyBootstrapper();
+            bootstrapper.Run(this);
+            return bootstrapper;
         }
+
+        #endregion
     }
 }

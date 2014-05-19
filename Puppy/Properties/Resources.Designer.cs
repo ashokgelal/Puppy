@@ -68,5 +68,14 @@ namespace PuppyFramework.Properties {
                 return ResourceManager.GetString("_appTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This method is not allowed. Use Run(BootstrapConfig) method instead..
+        /// </summary>
+        internal static string _invalidRunOperation {
+            get {
+                return ResourceManager.GetString("_invalidRunOperation", resourceCulture);
+            }
+        }
     }
 }

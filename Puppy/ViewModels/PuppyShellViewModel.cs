@@ -1,20 +1,21 @@
 ﻿#region Usings
 
+using System.ComponentModel.Composition;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Mvvm;
 using PuppyFramework.Interfaces;
-using System.ComponentModel.Composition;
 using PuppyFramework.Properties;
-using Serilog;
 
 #endregion
 
 namespace PuppyFramework.ViewModels
 {
-    [Export(typeof(PuppyShellViewModel))]
+    [Export(typeof (PuppyShellViewModel))]
     public class PuppyShellViewModel : BindableBase, IPuppyShellViewModel
     {
         #region Fields
 
+        protected readonly ILogger _logger;
         private string _title;
 
         #endregion
@@ -29,9 +30,15 @@ namespace PuppyFramework.ViewModels
 
         #endregion
 
-        public PuppyShellViewModel()
+        #region Constructors
+
+        [ImportingConstructor]
+        public PuppyShellViewModel(ILogger logger)
         {
-            Log.Information("Initialized class {ClassName}", GetType().Name);
+            _logger = logger;
+            _logger.Log("Initialized {ClassName:l}", Category.Info, null, GetType().Name);
         }
+
+        #endregion
     }
 }

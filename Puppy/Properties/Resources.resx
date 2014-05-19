@@ -120,4 +120,7 @@
   <data name="_appTitle" xml:space="preserve">
     <value>Puppy</value>
   </data>
+  <data name="_invalidRunOperation" xml:space="preserve">
+    <value>This method is not allowed. Use Run(RunstrapConfig) method instead.</value>
+  </data>
 </root>
