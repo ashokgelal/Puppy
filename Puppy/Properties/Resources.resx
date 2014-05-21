@@ -120,10 +120,25 @@
   <data name="_appTitle" xml:space="preserve">
     <value>Puppy</value>
   </data>
+  <data name="_fileMenuHeader" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="_helpMenuHeader" xml:space="preserve">
+    <value>Help</value>
+  </data>
   <data name="_invalidRunOperationException" xml:space="preserve">
     <value>This method is not allowed. Use Run(RunstrapConfig) method instead.</value>
   </data>
   <data name="_invalidShellTypeException" xml:space="preserve">
     <value>ShellView must a subclass of Window.</value>
+  </data>
+  <data name="_invalidTopLevelPositionException" xml:space="preserve">
+    <value>Invalid top level menu position {0}</value>
+  </data>
+  <data name="_parameterNullException" xml:space="preserve">
+    <value>Parameter can't be null. {0} Called from: Line #{1} {2} in {3</value>
+  </data>
+  <data name="_valueNullExceptionPattern" xml:space="preserve">
+    <value>{0} Called from: Line #{1} {2} in {3}</value>
   </data>
 </root>

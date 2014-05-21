@@ -70,6 +70,24 @@ namespace PuppyFramework.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        internal static string _fileMenuHeader {
+            get {
+                return ResourceManager.GetString("_fileMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        internal static string _helpMenuHeader {
+            get {
+                return ResourceManager.GetString("_helpMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This method is not allowed. Use Run(RunstrapConfig) method instead..
         /// </summary>
         internal static string _invalidRunOperationException {
@@ -84,6 +102,33 @@ namespace PuppyFramework.Properties {
         internal static string _invalidShellTypeException {
             get {
                 return ResourceManager.GetString("_invalidShellTypeException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid top level menu position {0}.
+        /// </summary>
+        internal static string _invalidTopLevelPositionException {
+            get {
+                return ResourceManager.GetString("_invalidTopLevelPositionException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter can&apos;t be null. {0} Called from: Line #{1} {2} in {3.
+        /// </summary>
+        internal static string _parameterNullException {
+            get {
+                return ResourceManager.GetString("_parameterNullException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Called from: Line #{1} {2} in {3}.
+        /// </summary>
+        internal static string _valueNullExceptionPattern {
+            get {
+                return ResourceManager.GetString("_valueNullExceptionPattern", resourceCulture);
             }
         }
     }
