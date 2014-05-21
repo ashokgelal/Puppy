@@ -1,8 +1,9 @@
 ﻿#region Usings
 
-using System.Threading.Tasks;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.ServiceLocation;
+using PuppyFramework.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -22,6 +23,21 @@ namespace PuppyFramework.Interfaces
         #region Methods
 
         void Log(string message, Category category, string logSource = null, params object[] propertyValues);
+
+        #endregion
+    }
+
+    public interface IMenuFactory
+    {
+    }
+
+    public interface IMenuRegisterService
+    {
+        #region Methods
+
+        bool Register(MenuItemBase menuItemToRegister, MenuItem attachToMenuItem);
+
+        bool Register(MenuItemBase menuItemToRegister);
 
         #endregion
     }

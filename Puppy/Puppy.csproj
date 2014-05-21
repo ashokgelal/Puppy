@@ -101,11 +101,18 @@
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Interfaces\PuppyInterfaces.cs" />
     <Compile Include="MagicStrings.cs" />
+    <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\MenuItemBase.cs" />
+    <Compile Include="Models\SeparatorMenuItem.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\ObservableSortedList.cs" />
+    <Compile Include="Services\DefaultMenuFactory.cs" />
+    <Compile Include="Services\WeightBasedMenuItemComparer.cs" />
+    <Compile Include="Services\MenuRegisterService.cs" />
     <Compile Include="Services\SerilogLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\PuppyShell.xaml.cs">
