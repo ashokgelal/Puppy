@@ -9,9 +9,9 @@ using PuppyFramework.ViewModels;
 
 namespace Puppy.Sample.ViewModel
 {
-    // comment out this Export attribute if you won't want to provide your own ShellViewModel
-    [Export(typeof (IPuppyShellViewModel))]
-    internal class SampleShellViewModel : PuppyShellViewModel
+    // comment out this Export attribute if you don't want to provide your own ShellViewModel
+    [Export(typeof (IShellViewModel))]
+    internal class SampleShellViewModel : DefaultShellViewModel
     {
         #region Properties
 

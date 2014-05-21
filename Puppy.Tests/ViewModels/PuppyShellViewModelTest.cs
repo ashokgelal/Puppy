@@ -31,7 +31,7 @@ namespace Puppy.Tests.ViewModels
         {
             var applicationHandler = Substitute.For<IApplicationCloseHandler>();
             applicationHandler.ShoulCloseApplicationAsync().Returns(Task.FromResult(UserPromptResult.Yes));
-            var model = new PuppyShellViewModel(_logger)
+            var model = new DefaultShellViewModel(_logger)
             {
                 ApplicationCloseHandler = new Lazy<IApplicationCloseHandler>(() => applicationHandler)
             };
@@ -42,7 +42,7 @@ namespace Puppy.Tests.ViewModels
         [Fact]
         public async Task TestClosingCommandCancel_NoApplicationHandler()
         {
-            var model = new PuppyShellViewModel(_logger);
+            var model = new DefaultShellViewModel(_logger);
             var cancelEventArgs = new CancelEventArgs();
             await model.AppClosingCommand.Execute(cancelEventArgs);
             Assert.False(cancelEventArgs.Cancel);
@@ -53,7 +53,7 @@ namespace Puppy.Tests.ViewModels
         {
             var applicationHandler = Substitute.For<IApplicationCloseHandler>();
             applicationHandler.ShoulCloseApplicationAsync().Returns(Task.FromResult(UserPromptResult.Yes));
-            var model = new PuppyShellViewModel(_logger)
+            var model = new DefaultShellViewModel(_logger)
             {
                 ApplicationCloseHandler = new Lazy<IApplicationCloseHandler>(() => applicationHandler)
             };
@@ -67,7 +67,7 @@ namespace Puppy.Tests.ViewModels
         {
             var applicationHandler = Substitute.For<IApplicationCloseHandler>();
             applicationHandler.ShoulCloseApplicationAsync().Returns(Task.FromResult(UserPromptResult.No));
-            var model = new PuppyShellViewModel(_logger)
+            var model = new DefaultShellViewModel(_logger)
             {
                 ApplicationCloseHandler = new Lazy<IApplicationCloseHandler>(() => applicationHandler)
             };

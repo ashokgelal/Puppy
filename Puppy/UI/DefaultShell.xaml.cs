@@ -9,12 +9,12 @@ using System.Threading;
 
 namespace PuppyFramework.UI
 {
-    [Export(typeof(PuppyShell))]
-    public partial class PuppyShell : IPuppyShellView
+    [Export(typeof(DefaultShell))]
+    public partial class DefaultShell : IPuppyShellView
     {
         #region Properties
 
-        public IPuppyShellViewModel ViewModel
+        public IShellViewModel ViewModel
         {
             set { DataContext = value; }
         }
@@ -23,7 +23,7 @@ namespace PuppyFramework.UI
 
         #region Constructors
 
-        public PuppyShell()
+        public DefaultShell()
         {
             InitializeComponent();
 #if DEBUG_NP

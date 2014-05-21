@@ -1,4 +1,4 @@
-﻿<Window x:Class="PuppyFramework.UI.PuppyShell"
+﻿<Window x:Class="PuppyFramework.UI.DefaultShell"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,7 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:prism="http://www.codeplex.com/prism"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModels:PuppyShellViewModel}"
+        d:DataContext="{d:DesignInstance viewModels:DefaultShellViewModel}"
         Title="{Binding Title}" Height="350" Width="525">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">

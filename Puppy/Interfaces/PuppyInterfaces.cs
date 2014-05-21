@@ -46,7 +46,7 @@ namespace PuppyFramework.Interfaces
     {
         #region Properties
 
-        IPuppyShellViewModel ViewModel { set; }
+        IShellViewModel ViewModel { set; }
 
         #endregion
 
@@ -57,7 +57,7 @@ namespace PuppyFramework.Interfaces
         #endregion
     }
 
-    public interface IPuppyShellViewModel
+    public interface IShellViewModel
     {
     }
 }

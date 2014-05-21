@@ -14,8 +14,8 @@ using PuppyFramework.Properties;
 
 namespace PuppyFramework.ViewModels
 {
-    [Export(typeof (PuppyShellViewModel))]
-    public class PuppyShellViewModel : BindableBase, IPuppyShellViewModel
+    [Export(typeof (DefaultShellViewModel))]
+    public class DefaultShellViewModel : BindableBase, IShellViewModel
     {
         #region Fields
 
@@ -44,7 +44,7 @@ namespace PuppyFramework.ViewModels
         #region Constructors
 
         [ImportingConstructor]
-        public PuppyShellViewModel(ILogger logger)
+        public DefaultShellViewModel(ILogger logger)
         {
             _logger = logger;
             Initialize();

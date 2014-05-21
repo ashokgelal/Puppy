@@ -74,7 +74,7 @@ namespace PuppyFramework.Bootstrap
         protected override DependencyObject CreateShell()
         {
             var customShell = Container.GetExportedValueOrDefault<IPuppyShellView>();
-            var shell = (customShell ?? Container.GetExportedValue<PuppyShell>()) as Window;
+            var shell = (customShell ?? Container.GetExportedValue<DefaultShell>()) as Window;
             if (shell == null)
             {
                 throw new InvalidCastException(Resources._invalidShellTypeException);
@@ -100,8 +100,8 @@ namespace PuppyFramework.Bootstrap
         {
             base.InitializeShell();
             var shell = ((IPuppyShellView)Shell);
-            shell.ViewModel = Container.GetExportedValueOrDefault<IPuppyShellViewModel>()
-                              ?? Container.GetExportedValue<PuppyShellViewModel>();
+            shell.ViewModel = Container.GetExportedValueOrDefault<IShellViewModel>()
+                              ?? Container.GetExportedValue<DefaultShellViewModel>();
             shell.Show();
             _logger.Log(string.Format("Initialized {0}", shell.GetType().Name), Category.Info);
         }

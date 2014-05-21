@@ -7,13 +7,13 @@ using System.ComponentModel.Composition;
 
 namespace Puppy.Sample
 {
-    // comment out this Export attribute if you won't want to provide your own Shell
+    // comment out this Export attribute if you don't want to provide your own Shell
     [Export(typeof(IPuppyShellView))]
     public partial class SampleShell : IPuppyShellView
     {
         #region Properties
 
-        public IPuppyShellViewModel ViewModel
+        public IShellViewModel ViewModel
         {
             set { DataContext = value; }
         }

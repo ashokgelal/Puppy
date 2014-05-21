@@ -115,10 +115,10 @@
     <Compile Include="Services\MenuRegisterService.cs" />
     <Compile Include="Services\SerilogLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\PuppyShell.xaml.cs">
-      <DependentUpon>PuppyShell.xaml</DependentUpon>
+    <Compile Include="UI\DefaultShell.xaml.cs">
+      <DependentUpon>DefaultShell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\PuppyShellViewModel.cs" />
+    <Compile Include="ViewModels\DefaultShellViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -132,7 +132,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="UI\PuppyShell.xaml">
+    <Page Include="UI\DefaultShell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
