@@ -115,6 +115,15 @@ namespace PuppyFramework.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You asked to add a main menu in your custom shell but there doesn&apos;t seem to be a region name {0} for adding the menu. Please add a ContentControl with a region name {0} in your shell..
+        /// </summary>
+        internal static string _noMainMenuContentRegionException {
+            get {
+                return ResourceManager.GetString("_noMainMenuContentRegionException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameter can&apos;t be null. {0} Called from: Line #{1} {2} in {3.
         /// </summary>
         internal static string _parameterNullException {

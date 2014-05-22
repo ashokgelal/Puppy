@@ -4,14 +4,12 @@ using PuppyFramework.Helpers;
 using PuppyFramework.Interfaces;
 using PuppyFramework.Models;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 
 #endregion
 
 namespace PuppyFramework.Services
 {
-    [Export]
     public class MenuRegisterService : IMenuRegisterService
     {
         #region Fields
@@ -28,16 +26,22 @@ namespace PuppyFramework.Services
 
         #region Constructors
 
-        [ImportingConstructor]
-        public MenuRegisterService([Import(AllowDefault = true)] WeightBasedMenuItemComparer menuItemComparer)
+        public MenuRegisterService(IComparer<MenuItemBase> menuItemComparer)
         {
-            _menuItemComparer = menuItemComparer ?? new WeightBasedMenuItemComparer();
+            _menuItemComparer = menuItemComparer;
             MenuItems = new ObservableSortedList<MenuItemBase>(4, _menuItemComparer);
         }
 
         #endregion
 
         #region Methods
+
+        public bool Deregister(MenuItemBase menuItemToDeregister, MenuItem detachFrommenuItem)
+        {
+            menuItemToDeregister.EnsureParameterNotNull("menuItemToDeregister");
+            detachFrommenuItem.EnsureParameterNotNull("detachFrommenuItem");
+            return detachFrommenuItem.Children.Remove(menuItemToDeregister);
+        }
 
         private static void HideHalfOrphanSeparators(MenuItem parentMenuItem)
         {
@@ -75,13 +79,6 @@ namespace PuppyFramework.Services
             if (MenuItems.Contains(menuItemToRegister)) return false;
             MenuItems.Add(menuItemToRegister);
             return true;
-        }
-
-        public bool Deregister(MenuItemBase menuItemToDeregister, MenuItem detachFrommenuItem)
-        {
-            menuItemToDeregister.EnsureParameterNotNull("menuItemToDeregister");
-            detachFrommenuItem.EnsureParameterNotNull("detachFrommenuItem");
-            return detachFrommenuItem.Children.Remove(menuItemToDeregister);
         }
 
         #endregion

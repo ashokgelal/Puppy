@@ -4,6 +4,7 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                       xmlns:prism="http://www.codeplex.com/prism"
+                      xmlns:puppyFramework="clr-namespace:PuppyFramework;assembly=PuppyFramework"
                       ShowWindowCommandsOnTop="False" SaveWindowPosition="True"
                       ShowIconOnTitleBar="True" ResizeMode="CanResizeWithGrip"
                       Title="SampleShell" Height="600" Width="800">
@@ -16,6 +17,13 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ContentControl Grid.Row="0" 
+                        prism:RegionManager.RegionName="{x:Static puppyFramework:MagicStrings+RegionNames.PUPPY_MAIN_MENU_CONTENT_REGION}"/>
 
     </Grid>
 </controls:MetroWindow>

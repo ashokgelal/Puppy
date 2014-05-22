@@ -1,8 +1,9 @@
 ﻿#region Usings
 
 using Microsoft.Practices.Prism.Logging;
+using PuppyFramework.Bootstrap;
 using PuppyFramework.Models;
-using System.Collections.Generic;
+using PuppyFramework.Services;
 using System.Threading.Tasks;
 
 #endregion
@@ -18,6 +19,15 @@ namespace PuppyFramework.Interfaces
         #endregion
     }
 
+    public interface IBootableService
+    {
+        #region Methods
+
+        void Boot(BootstrapConfig bootstrapConfig);
+
+        #endregion
+    }
+
     public interface ILogger
     {
         #region Methods
@@ -29,10 +39,21 @@ namespace PuppyFramework.Interfaces
 
     public interface IMenuFactory
     {
+        #region Methods
+
+        MenuItem MakeCoreMenuItem(CoreMenuItemType coreMenuItemType);
+
+        #endregion
     }
 
     public interface IMenuRegisterService
     {
+        #region Properties
+
+        ObservableSortedList<MenuItemBase> MenuItems { get; }
+
+        #endregion
+
         #region Methods
 
         bool Register(MenuItemBase menuItemToRegister, MenuItem attachToMenuItem);
@@ -42,7 +63,7 @@ namespace PuppyFramework.Interfaces
         #endregion
     }
 
-    public interface IPuppyShellView
+    public interface IShell
     {
         #region Properties
 

@@ -13,29 +13,38 @@ namespace PuppyFramework.Services
     {
         #region Fields
 
-        public const int FILE_MENU_DEFAULT_POSITION = 0;
-        public const int EDIT_MENU_DEFAULT_POSITION = 10;
-        public const int VIEW_MENU_DEFAULT_POSITION = 20;
-        public const int HELP_MENU_DEFAULT_POSITION = 100;
         private MenuItem _fileMenuItem;
         private MenuItem _helpMenuItem;
+        private MenuItem _exitMenuItem;
 
         #endregion
 
         #region Methods
 
-        public virtual MenuItem MakeTopLevelMenuItem(int topLevelMenuPosition)
+        public virtual MenuItem MakeCoreMenuItem(CoreMenuItemType coreMenuItemType)
         {
-            switch (topLevelMenuPosition)
+            var weight = ((int) coreMenuItemType);
+            switch (coreMenuItemType)
             {
-                case FILE_MENU_DEFAULT_POSITION:
-                    return _fileMenuItem = _fileMenuItem ?? new MenuItem(Resources._fileMenuHeader, topLevelMenuPosition);
-                case HELP_MENU_DEFAULT_POSITION:
-                    return _helpMenuItem = _helpMenuItem ?? new MenuItem(Resources._helpMenuHeader, topLevelMenuPosition);
+                case CoreMenuItemType.File:
+                    return _fileMenuItem = _fileMenuItem ?? new MenuItem(Resources._fileMenuHeader, weight);
+                case CoreMenuItemType.Help:
+                    return _helpMenuItem = _helpMenuItem ?? new MenuItem(Resources._helpMenuHeader, weight);
+                case CoreMenuItemType.Exit:
+                    return _exitMenuItem = _exitMenuItem ?? new MenuItem("Exit", weight);
             }
             throw new ArgumentOutOfRangeException(Resources._invalidTopLevelPositionException);
         }
 
         #endregion
+    }
+
+    public enum CoreMenuItemType
+    {
+        File = 0,
+        Edit = 10,
+        View = 20,
+        Help = 100,
+        Exit = 1000
     }
 }

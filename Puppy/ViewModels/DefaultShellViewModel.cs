@@ -48,7 +48,7 @@ namespace PuppyFramework.ViewModels
         {
             _logger = logger;
             Initialize();
-            _logger.Log("Initialized {ClassName:l}", Category.Info, null, GetType().Name);
+            _logger.Log("Initialized {ClassName:l}", Category.Info, null, GetType().FullName);
         }
 
         #endregion

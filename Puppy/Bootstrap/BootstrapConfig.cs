@@ -4,9 +4,13 @@
     {
         #region Properties
 
-        public bool EnableMenuService { get; set; }
+        public bool AddMainMenu { get; set; }
 
         public bool EnableUpdaterService { get; set; }
+
+        public bool IsUsingCustomShell { get; internal set; }
+
+        public bool IsUsingCustomShellViewModel { get; internal set; }
 
         public bool RegisterDefaultPrismServices { get; set; }
 

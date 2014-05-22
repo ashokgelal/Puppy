@@ -10,7 +10,7 @@ using System.Threading;
 namespace PuppyFramework.UI
 {
     [Export(typeof(DefaultShell))]
-    public partial class DefaultShell : IPuppyShellView
+    public partial class DefaultShell : IShell
     {
         #region Properties
 

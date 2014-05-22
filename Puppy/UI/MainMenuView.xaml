@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="PuppyFramework.UI.MainMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:menuService="clr-namespace:PuppyFramework.MenuService"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance menuService:MainMenuViewModel}"
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
+
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="_boolToVisiblityConverter" />
+            <Style x:Key="_menuItemContainerStyle" TargetType="MenuItem">
+                <Setter Property="VerticalAlignment" Value="Center" />
+<!--                <Setter Property="Visibility"-->
+<!--                        Value="{Binding HiddenFlag, Converter={StaticResource _boolToVisiblityConverter}}" />-->
+                <Setter Property="Header" Value="{Binding Title}" />
+                <Setter Property="ItemsSource" Value="{Binding Children}" />
+                <Setter Property="Command" Value="{Binding Command}" />
+                <Setter Property="CommandParameter" Value="{Binding CommandParameter}" />
+<!--                <Setter Property="Icon" Value="{Binding ItsIconUrl}" />-->
+<!--                <Setter Property="IsChecked" Value="{Binding ItsCheckedFlag}" />-->
+<!--                <Setter Property="IsCheckable" Value="{Binding ItsCheckableFlag}" />-->
+                <Setter Property="Height" Value="22" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Menu Name="MainMenu"
+              ItemContainerStyle="{StaticResource _menuItemContainerStyle}"
+              ItemsSource="{Binding MenuItems}" />
+    </Grid>
+
+</UserControl>

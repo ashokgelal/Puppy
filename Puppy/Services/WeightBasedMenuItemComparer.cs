@@ -15,9 +15,7 @@ namespace PuppyFramework.Services
         {
             if (x == null)
                 return -1;
-            if (y == null)
-                return 1;
-            return -1 * x.Weight.CompareTo(y.Weight);
+            return y == null ? 1 : x.Weight.CompareTo(y.Weight);
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.Windows.Input;
 using PuppyFramework.Services;
 using System.Collections.Generic;
 
@@ -17,6 +18,10 @@ namespace PuppyFramework.Models
         #endregion
 
         #region Properties
+
+        public ICommand Command { get; set; }
+
+        public object CommandParamter { get; set; }
 
         public ObservableSortedList<MenuItemBase> Children
         {

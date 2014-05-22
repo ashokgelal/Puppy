@@ -1,19 +1,19 @@
 ﻿#region Usings
 
-using PuppyFramework.Interfaces;
+using PuppyFramework.MenuService;
 using System.ComponentModel.Composition;
 
 #endregion
 
-namespace Puppy.Sample
+namespace PuppyFramework.UI
 {
-    // comment out this Export attribute if you don't want to provide your own Shell
-    [Export(typeof(IShell))]
-    public partial class SampleShell : IShell
+    [Export]
+    public partial class MainMenuView
     {
         #region Properties
 
-        public IShellViewModel ViewModel
+        [Import]
+        public MainMenuViewModel ViewModel
         {
             set { DataContext = value; }
         }
@@ -22,7 +22,7 @@ namespace Puppy.Sample
 
         #region Constructors
 
-        public SampleShell()
+        public MainMenuView()
         {
             InitializeComponent();
         }

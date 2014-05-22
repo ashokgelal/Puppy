@@ -27,7 +27,7 @@ namespace PuppyFramework.Services
                          ?? new LoggerConfiguration().Enrich.FromLogContext().WriteTo.ColoredConsole(outputTemplate: "{Timestamp:HH:mm} [{LogSource:l}, {Level}] {Message}{NewLine}{Exception}").ReadAppSettings();
             Serilog.Log.Logger = config.CreateLogger();
             var message = loggerConfiguration == null ? "default built-in" : "user defined";
-            Log("Serilog Logger has been configured with {Message:l} settings", Category.Info, _defaultLogSource, message);
+            Log("Serilog Logger configured with {Message:l} settings", Category.Info, _defaultLogSource, message);
         }
 
         #endregion

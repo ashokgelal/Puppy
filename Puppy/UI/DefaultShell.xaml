@@ -6,6 +6,7 @@
         xmlns:viewModels="clr-namespace:PuppyFramework.ViewModels"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:prism="http://www.codeplex.com/prism"
+        xmlns:puppyFramework="clr-namespace:PuppyFramework"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:DefaultShellViewModel}"
         Title="{Binding Title}" Height="350" Width="525">
@@ -18,5 +19,15 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ContentControl Grid.Row="0" 
+                        prism:RegionManager.RegionName="{x:Static puppyFramework:MagicStrings+RegionNames.PUPPY_MAIN_MENU_CONTENT_REGION}"/>
+
+        <ContentControl Grid.Row="1"
+                        prism:RegionManager.RegionName="{x:Static puppyFramework:MagicStrings+RegionNames.PUPPY_MAIN_CONTENT_REGION}"/>
     </Grid>
 </Window>

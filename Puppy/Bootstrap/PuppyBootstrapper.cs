@@ -1,19 +1,21 @@
 ﻿#region Usings
 
-using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Prism.MefExtensions;
-using PuppyFramework.Helpers;
-using PuppyFramework.Interfaces;
-using PuppyFramework.Properties;
-using PuppyFramework.Services;
-using PuppyFramework.UI;
-using PuppyFramework.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Configuration;
 using System.Reflection;
 using System.Windows;
+using Microsoft.Practices.Prism.Logging;
+using Microsoft.Practices.Prism.MefExtensions;
+using PuppyFramework.Helpers;
+using PuppyFramework.Interfaces;
+using PuppyFramework.Models;
+using PuppyFramework.Properties;
+using PuppyFramework.Services;
+using PuppyFramework.UI;
+using PuppyFramework.ViewModels;
 
 #endregion
 
@@ -39,7 +41,7 @@ namespace PuppyFramework.Bootstrap
 
         public PuppyBootstrapper()
         {
-            var assembly = Assembly.GetAssembly(typeof(PuppyBootstrapper)).GetName();
+            var assembly = Assembly.GetAssembly(typeof (PuppyBootstrapper)).GetName();
             _assemblyName = assembly.Name;
             _version = assembly.Version.ToString();
         }
@@ -50,7 +52,7 @@ namespace PuppyFramework.Bootstrap
 
         protected override void ConfigureAggregateCatalog()
         {
-            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(PuppyBootstrapper).Assembly));
+            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof (PuppyBootstrapper).Assembly));
             var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly != null)
             {
@@ -61,6 +63,7 @@ namespace PuppyFramework.Bootstrap
         protected override void ConfigureContainer()
         {
             Container.ComposeExportedValue<ILogger>(_logger);
+            RegisterDefaultServicesIfMissing();
             base.ConfigureContainer();
         }
 
@@ -73,12 +76,14 @@ namespace PuppyFramework.Bootstrap
 
         protected override DependencyObject CreateShell()
         {
-            var customShell = Container.GetExportedValueOrDefault<IPuppyShellView>();
+            var customShell = Container.GetExportedValueOrDefault<IShell>();
+            BootstrapConfig.IsUsingCustomShell = customShell != null;
             var shell = (customShell ?? Container.GetExportedValue<DefaultShell>()) as Window;
             if (shell == null)
             {
                 throw new InvalidCastException(Resources._invalidShellTypeException);
             }
+            _logger.Log("Created shell {ClassName:l}", Category.Info, null, shell.GetType().FullName);
             return shell;
         }
 
@@ -86,12 +91,14 @@ namespace PuppyFramework.Bootstrap
         {
             try
             {
+                _logger.Log("Reading settings from App.Config", Category.Info);
                 var value = ConfigurationManager.AppSettings[key];
+                _logger.Log("Found value {Value} for key {Key}", Category.Info, null, value, key);
                 return TConverter.ChangeType<T>(value);
             }
             catch (Exception)
             {
-                _logger.Log(string.Format("Error fetching app setting for key: {0}. Using default value.", key), Category.Warn, Priority.High);
+                _logger.Log("Error fetching app setting for key {Key}; using default value", Category.Warn, null, key);
                 return defaultValue;
             }
         }
@@ -99,23 +106,42 @@ namespace PuppyFramework.Bootstrap
         protected override void InitializeShell()
         {
             base.InitializeShell();
-            var shell = ((IPuppyShellView)Shell);
-            shell.ViewModel = Container.GetExportedValueOrDefault<IShellViewModel>()
+            var shell = (IShell) Shell;
+            var customShellViewModel = Container.GetExportedValueOrDefault<IShellViewModel>();
+            shell.ViewModel = customShellViewModel
                               ?? Container.GetExportedValue<DefaultShellViewModel>();
+
+            BootstrapConfig.IsUsingCustomShellViewModel = customShellViewModel != null;
+
+            RunBootableServices();
+
+            _logger.Log("Initialized shell {ClassName:l}", Category.Info, null, shell.GetType().FullName);
             shell.Show();
-            _logger.Log(string.Format("Initialized {0}", shell.GetType().Name), Category.Info);
+            _logger.Log("Showing shell {ClassName:l}", Category.Info, null, shell.GetType().FullName);
         }
 
         private BootstrapConfig ReadConfigFromApplicationSettings()
         {
-            var enableMenu = GetAppSetting(MagicStrings.ASK_ENABLE_MENU_SERVICE, true);
-            var enableUpdater = GetAppSetting(MagicStrings.ASK_ENABLE_UPDATER_SERVICE, false);
+            var enableMenu = GetAppSetting(MagicStrings.Keys.ASK_ADD_MAIN_MENU, true);
+            var enableUpdater = GetAppSetting(MagicStrings.Keys.ASK_ENABLE_UPDATER_SERVICE, false);
             _logger.Log("Created BootstrapConfig from App.Config", Category.Info);
             return new BootstrapConfig
             {
-                EnableMenuService = enableMenu,
+                AddMainMenu = enableMenu,
                 EnableUpdaterService = enableUpdater,
             };
+        }
+
+        private void RegisterDefaultServicesIfMissing()
+        {
+            var menuFactory = Container.GetExportedValueOrDefault<IMenuFactory>() ?? new DefaultMenuFactory();
+            Container.ComposeExportedValue(menuFactory);
+
+            var menuComparer = Container.GetExportedValueOrDefault<IComparer<MenuItemBase>>() ?? new WeightBasedMenuItemComparer();
+            Container.ComposeExportedValue(menuComparer);
+
+            var menuRegisterService = Container.GetExportedValueOrDefault<IMenuRegisterService>() ?? new MenuRegisterService(menuComparer);
+            Container.ComposeExportedValue(menuRegisterService);
         }
 
         public void Run(BootstrapConfig config = null)
@@ -126,16 +152,25 @@ namespace PuppyFramework.Bootstrap
                 config = ReadConfigFromApplicationSettings();
             }
             BootstrapConfig = config;
-            _logger.Log(string.Format("Running app"), Category.Info);
-            _logger.Log(string.Format("Enable MenuService? {0}", BootstrapConfig.EnableMenuService), Category.Info);
-            _logger.Log(string.Format("Enable UpdaterService? {0}", BootstrapConfig.EnableUpdaterService), Category.Info);
-            _logger.Log(string.Format("Register Default Prism Library Services? {0}", BootstrapConfig.RegisterDefaultPrismServices), Category.Info);
+            _logger.Log("Running app", Category.Info);
+            _logger.Log("Add MainMenu? {Status:l}", Category.Info, null, BootstrapConfig.AddMainMenu);
+            _logger.Log("Enable UpdaterService? {Status:l}", Category.Info, null, BootstrapConfig.EnableUpdaterService);
+            _logger.Log("Register Default Prism Library Services? {Status:l}", Category.Info, null, BootstrapConfig.RegisterDefaultPrismServices);
             base.Run(config.RegisterDefaultPrismServices);
         }
 
         public override void Run(bool registerDefaultPrismServices)
         {
             throw new InvalidOperationException(Resources._invalidRunOperationException);
+        }
+
+        private void RunBootableServices()
+        {
+            var services = Container.GetExportedValues<IBootableService>();
+            foreach (var service in services)
+            {
+                service.Boot(BootstrapConfig);
+            }
         }
 
         #endregion

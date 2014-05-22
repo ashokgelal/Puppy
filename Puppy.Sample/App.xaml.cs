@@ -19,7 +19,7 @@ namespace Puppy.Sample
 //            new BootstrapConfig
 //            {
 //                EnableUpdaterService = true, // false by default
-//                EnableMenuService = true, // true by default
+//                AddMainMenu = true, // true by default
 //            }.Run();
 
             // ... OR if you have your own bootstrapper that extends PuppyBootstrapper, do

@@ -135,6 +135,9 @@
   <data name="_invalidTopLevelPositionException" xml:space="preserve">
     <value>Invalid top level menu position {0}</value>
   </data>
+  <data name="_noMainMenuContentRegionException" xml:space="preserve">
+    <value>You asked to add a main menu in your custom shell but there doesn't seem to be a region name {0} for adding the menu. Please add a ContentControl with a region name {0} in your shell.</value>
+  </data>
   <data name="_parameterNullException" xml:space="preserve">
     <value>Parameter can't be null. {0} Called from: Line #{1} {2} in {3</value>
   </data>

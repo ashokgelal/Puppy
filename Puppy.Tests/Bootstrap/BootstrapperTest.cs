@@ -23,12 +23,12 @@ namespace Puppy.Tests.Bootstrap
         {
             var config = new BootstrapConfig
             {
-                EnableMenuService = false,
+                AddMainMenu = false,
                 EnableUpdaterService = true
             };
             var bootstrapper = new TestBootstrapper();
             bootstrapper.Run(config);
-            Assert.False(bootstrapper.BootstrapConfig.EnableMenuService);
+            Assert.False(bootstrapper.BootstrapConfig.AddMainMenu);
             Assert.True(bootstrapper.BootstrapConfig.EnableUpdaterService);
         }
 
@@ -37,7 +37,7 @@ namespace Puppy.Tests.Bootstrap
         {
             var bootstrapper = new TestBootstrapper();
             bootstrapper.Run();
-            Assert.True(bootstrapper.BootstrapConfig.EnableMenuService);
+            Assert.True(bootstrapper.BootstrapConfig.AddMainMenu);
             Assert.False(bootstrapper.BootstrapConfig.EnableUpdaterService);
         }
 
