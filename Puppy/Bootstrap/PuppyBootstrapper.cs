@@ -27,7 +27,7 @@ namespace PuppyFramework.Bootstrap
 
         private readonly string _assemblyName;
         private readonly string _version;
-        private SerilogLogger _logger;
+        protected SerilogLogger _logger;
 
         #endregion
 
