@@ -11,6 +11,7 @@
             // ask = App Setting Key
             public static readonly string ASK_ADD_MAIN_MENU = "puppy:bootstrap:addMainMenu";
             public static readonly string ASK_ENABLE_UPDATER_SERVICE = "puppy:bootstrap:enableUpdaterService";
+            public static readonly string ASK_MODULES_DIRECTORY = "puppy:bootstrap:modulesDirectory";
 
             #endregion
         }

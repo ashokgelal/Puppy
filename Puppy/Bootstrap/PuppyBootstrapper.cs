@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Configuration;
+using System.IO;
 using System.Reflection;
 using System.Windows;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.MefExtensions;
+using Microsoft.Practices.Prism.Modularity;
 using PuppyFramework.Helpers;
 using PuppyFramework.Interfaces;
 using PuppyFramework.Models;
@@ -49,6 +51,26 @@ namespace PuppyFramework.Bootstrap
         #endregion
 
         #region Methods
+
+        protected override IModuleCatalog CreateModuleCatalog()
+        {
+            if (string.IsNullOrWhiteSpace(BootstrapConfig.ModulesDirectory))
+            {
+                return base.CreateModuleCatalog();
+            }
+
+            _logger.Log("Using {ModulesDirectory:l} for loading modules", Category.Info, null, BootstrapConfig.ModulesDirectory);
+            var outputDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) ?? "./";
+            var moduleLocation = Path.Combine(outputDir, BootstrapConfig.ModulesDirectory);
+            var catalog = new DirectoryModuleCatalog();
+            if (!Directory.Exists(moduleLocation))
+            {
+                _logger.Log("Modules directory {ModulesDirectory} doesn't exist in {Path:l}. Creating one for ya!", Category.Warn, null, BootstrapConfig.ModulesDirectory, moduleLocation);
+                Directory.CreateDirectory(moduleLocation);
+            }
+            catalog.ModulePath = moduleLocation;
+            return catalog;
+        }
 
         protected override void ConfigureAggregateCatalog()
         {
@@ -124,11 +146,13 @@ namespace PuppyFramework.Bootstrap
         {
             var enableMenu = GetAppSetting(MagicStrings.Keys.ASK_ADD_MAIN_MENU, true);
             var enableUpdater = GetAppSetting(MagicStrings.Keys.ASK_ENABLE_UPDATER_SERVICE, false);
+            var modulesDirectory = GetAppSetting<string>(MagicStrings.Keys.ASK_MODULES_DIRECTORY);
             _logger.Log("Created BootstrapConfig from App.Config", Category.Info);
             return new BootstrapConfig
             {
                 AddMainMenu = enableMenu,
                 EnableUpdaterService = enableUpdater,
+                ModulesDirectory = modulesDirectory
             };
         }
 

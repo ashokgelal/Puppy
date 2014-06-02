@@ -14,6 +14,8 @@
 
         public bool RegisterDefaultPrismServices { get; set; }
 
+        public string ModulesDirectory { get; set; } 
+
         #endregion
 
         #region Constructors
