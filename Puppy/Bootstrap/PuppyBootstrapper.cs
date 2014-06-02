@@ -62,14 +62,12 @@ namespace PuppyFramework.Bootstrap
             _logger.Log("Using {ModulesDirectory:l} for loading modules", Category.Info, null, BootstrapConfig.ModulesDirectory);
             var outputDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) ?? "./";
             var moduleLocation = Path.Combine(outputDir, BootstrapConfig.ModulesDirectory);
-            var catalog = new DirectoryModuleCatalog();
             if (!Directory.Exists(moduleLocation))
             {
                 _logger.Log("Modules directory {ModulesDirectory} doesn't exist in {Path:l}. Creating one for ya!", Category.Warn, null, BootstrapConfig.ModulesDirectory, moduleLocation);
                 Directory.CreateDirectory(moduleLocation);
             }
-            catalog.ModulePath = moduleLocation;
-            return catalog;
+            return new DirectoryModuleCatalog {ModulePath = moduleLocation};
         }
 
         protected override void ConfigureAggregateCatalog()
