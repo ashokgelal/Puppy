@@ -1,21 +1,20 @@
 ﻿#region Usings
 
 using PuppyFramework.Interfaces;
-using PuppyFramework.Models;
 using PuppyFramework.Properties;
 using System;
 
 #endregion
 
-namespace PuppyFramework.Services
+namespace PuppyFramework.MenuService
 {
     public class DefaultMenuFactory : IMenuFactory
     {
         #region Fields
 
-        private MenuItem _fileMenuItem;
-        private MenuItem _helpMenuItem;
-        private MenuItem _exitMenuItem;
+        public MenuItem _fileMenuItem;
+        public MenuItem _helpMenuItem;
+        public MenuItem _exitMenuItem;
 
         #endregion
 
@@ -23,7 +22,7 @@ namespace PuppyFramework.Services
 
         public virtual MenuItem MakeCoreMenuItem(CoreMenuItemType coreMenuItemType)
         {
-            var weight = ((int) coreMenuItemType);
+            var weight = ((int)coreMenuItemType);
             switch (coreMenuItemType)
             {
                 case CoreMenuItemType.File:
@@ -31,20 +30,11 @@ namespace PuppyFramework.Services
                 case CoreMenuItemType.Help:
                     return _helpMenuItem = _helpMenuItem ?? new MenuItem(Resources._helpMenuHeader, weight);
                 case CoreMenuItemType.Exit:
-                    return _exitMenuItem = _exitMenuItem ?? new MenuItem("Exit", weight);
+                    return _exitMenuItem = _exitMenuItem ?? new MenuItem(Resources._exitMenuHeader, weight);
             }
             throw new ArgumentOutOfRangeException(Resources._invalidTopLevelPositionException);
         }
 
         #endregion
-    }
-
-    public enum CoreMenuItemType
-    {
-        File = 0,
-        Edit = 10,
-        View = 20,
-        Help = 100,
-        Exit = 1000
     }
 }

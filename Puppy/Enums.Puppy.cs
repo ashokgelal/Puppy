@@ -6,4 +6,13 @@
         No,
         Cancel
     }
+
+    public enum CoreMenuItemType
+    {
+        File = 0,
+        Edit = 10,
+        View = 20,
+        Help = 100,
+        Exit = 1000
+    }
 }
