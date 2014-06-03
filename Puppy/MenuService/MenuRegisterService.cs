@@ -2,18 +2,22 @@
 
 using PuppyFramework.Helpers;
 using PuppyFramework.Interfaces;
-using PuppyFramework.Models;
+using PuppyFramework.Services;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 
 #endregion
 
-namespace PuppyFramework.Services
+namespace PuppyFramework.MenuService
 {
     public class MenuRegisterService : IMenuRegisterService
     {
         #region Fields
 
+        [Import(AllowRecomposition = true)]
+        private Lazy<IShell> _shell;
         private readonly IComparer<MenuItemBase> _menuItemComparer;
 
         #endregion
@@ -35,6 +39,15 @@ namespace PuppyFramework.Services
         #endregion
 
         #region Methods
+
+        private void AddKeyBindingIfAny(MenuItemBase menuItemToRegister)
+        {
+            var menuItem = menuItemToRegister as MenuItem;
+            if (menuItem != null && menuItem.GlobalKeyBinding != null)
+            {
+                _shell.Value.AddGlobalKeyBinding(menuItem.GlobalKeyBinding);
+            }
+        }
 
         public bool Deregister(MenuItemBase menuItemToDeregister, MenuItem detachFrommenuItem)
         {
@@ -70,6 +83,7 @@ namespace PuppyFramework.Services
             attachToMenuItem.AddChild(menuItemToRegister, _menuItemComparer);
             HideHalfOrphanSeparators(attachToMenuItem);
             Register(attachToMenuItem);
+            AddKeyBindingIfAny(menuItemToRegister);
             return true;
         }
 

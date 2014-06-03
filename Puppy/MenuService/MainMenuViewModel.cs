@@ -4,11 +4,10 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Mvvm;
 using PuppyFramework.Interfaces;
-using PuppyFramework.Models;
-using PuppyFramework.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Windows;
+using System.Windows.Input;
 
 #endregion
 
@@ -58,10 +57,12 @@ namespace PuppyFramework.MenuService
             var exitmenu = _menuFactory.MakeCoreMenuItem(CoreMenuItemType.Exit);
             var helpmenu = _menuFactory.MakeCoreMenuItem(CoreMenuItemType.Help);
 
+            var exitCommand = new DelegateCommand(HandleExitCommand);
+            exitmenu.Command = exitCommand;
+            exitmenu.GlobalKeyBinding = new KeyBinding(exitCommand, Key.F4, ModifierKeys.Alt);
             _registerService.Register(exitmenu, filemenu);
             _registerService.Register(helpmenu);
 
-            exitmenu.Command = new DelegateCommand(HandleExitCommand);
             MenuItems = new ObservableCollection<MenuItemBase>(_registerService.MenuItems);
         }
 

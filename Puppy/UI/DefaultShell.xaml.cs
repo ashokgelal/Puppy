@@ -1,9 +1,11 @@
 ﻿#region Usings
 
+using PuppyFramework.Helpers;
 using PuppyFramework.Interfaces;
 using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Threading;
+using System.Windows.Input;
 
 #endregion
 
@@ -36,6 +38,12 @@ namespace PuppyFramework.UI
         #endregion
 
         #region Methods
+
+        public void AddGlobalKeyBinding(KeyBinding keyBinding)
+        {
+            keyBinding.EnsureParameterNotNull("keyBinding");
+            InputBindings.Add(keyBinding);
+        }
 
         public void SetCultureInfo(CultureInfo cultureInfo = null)
         {

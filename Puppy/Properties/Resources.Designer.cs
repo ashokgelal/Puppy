@@ -70,7 +70,16 @@ namespace PuppyFramework.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File.
+        ///   Looks up a localized string similar to E_xit.
+        /// </summary>
+        internal static string _exitMenuHeader {
+            get {
+                return ResourceManager.GetString("_exitMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _File.
         /// </summary>
         internal static string _fileMenuHeader {
             get {
@@ -79,7 +88,7 @@ namespace PuppyFramework.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Help.
+        ///   Looks up a localized string similar to _Help.
         /// </summary>
         internal static string _helpMenuHeader {
             get {

@@ -1,4 +1,4 @@
-﻿namespace PuppyFramework.Models
+﻿namespace PuppyFramework.MenuService
 {
     public class SeparatorMenuItem : MenuItemBase
     {

@@ -1,12 +1,12 @@
 ﻿#region Usings
 
+using System.Collections.Generic;
 using System.Windows.Input;
 using PuppyFramework.Services;
-using System.Collections.Generic;
 
 #endregion
 
-namespace PuppyFramework.Models
+namespace PuppyFramework.MenuService
 {
     public class MenuItem : MenuItemBase
     {
@@ -22,6 +22,8 @@ namespace PuppyFramework.Models
         public ICommand Command { get; set; }
 
         public object CommandParamter { get; set; }
+
+        public KeyBinding GlobalKeyBinding { get; set; }
 
         public ObservableSortedList<MenuItemBase> Children
         {

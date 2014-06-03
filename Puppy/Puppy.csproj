@@ -106,22 +106,25 @@
     <Compile Include="Enums.Puppy.cs" />
     <Compile Include="Helpers\ObjectExtensions.cs" />
     <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="Interfaces\MenuInterfaces.cs" />
     <Compile Include="Interfaces\PuppyInterfaces.cs" />
     <Compile Include="MagicStrings.cs" />
     <Compile Include="MenuService\MainMenuViewModel.cs" />
-    <Compile Include="Models\MenuItem.cs" />
-    <Compile Include="Models\MenuItemBase.cs" />
-    <Compile Include="Models\SeparatorMenuItem.cs" />
+    <Compile Include="MenuService\MenuItem.cs" />
+    <Compile Include="MenuService\MenuItemBase.cs" />
+    <Compile Include="MenuService\MenuLoader.cs" />
+    <Compile Include="MenuService\SeparatorMenuItem.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\ObservableSortedList.cs" />
-    <Compile Include="Services\DefaultMenuFactory.cs" />
+    <Compile Include="MenuService\DefaultMenuFactory.cs" />
     <Compile Include="Services\UIComposer.cs" />
-    <Compile Include="Services\WeightBasedMenuItemComparer.cs" />
-    <Compile Include="Services\MenuRegisterService.cs" />
+    <Compile Include="MenuService\WeightBasedMenuItemComparer.cs" />
+    <Compile Include="MenuService\MenuRegisterService.cs" />
     <Compile Include="Services\SerilogLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\DefaultShell.xaml.cs">
@@ -152,6 +155,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

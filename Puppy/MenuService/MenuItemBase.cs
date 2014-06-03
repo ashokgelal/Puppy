@@ -4,7 +4,7 @@ using Microsoft.Practices.Prism.Mvvm;
 
 #endregion
 
-namespace PuppyFramework.Models
+namespace PuppyFramework.MenuService
 {
     public abstract class MenuItemBase : BindableBase
     {

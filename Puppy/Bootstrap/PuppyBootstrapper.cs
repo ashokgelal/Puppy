@@ -13,7 +13,7 @@ using Microsoft.Practices.Prism.MefExtensions;
 using Microsoft.Practices.Prism.Modularity;
 using PuppyFramework.Helpers;
 using PuppyFramework.Interfaces;
-using PuppyFramework.Models;
+using PuppyFramework.MenuService;
 using PuppyFramework.Properties;
 using PuppyFramework.Services;
 using PuppyFramework.UI;
@@ -83,6 +83,7 @@ namespace PuppyFramework.Bootstrap
         protected override void ConfigureContainer()
         {
             Container.ComposeExportedValue<ILogger>(_logger);
+            Container.ComposeExportedValue(BootstrapConfig);
             RegisterDefaultServicesIfMissing();
             base.ConfigureContainer();
         }
@@ -103,8 +104,16 @@ namespace PuppyFramework.Bootstrap
             {
                 throw new InvalidCastException(Resources._invalidShellTypeException);
             }
+
             _logger.Log("Created shell {ClassName:l}", Category.Info, null, shell.GetType().FullName);
+            InitializeObjectsDependentOnShell();
             return shell;
+        }
+
+        private void InitializeObjectsDependentOnShell()
+        {
+            var menuRegisterService = Container.GetExportedValueOrDefault<IMenuRegisterService>();
+            Container.SatisfyImportsOnce(menuRegisterService);
         }
 
         private T GetAppSetting<T>(string key, T defaultValue = default(T))

@@ -120,11 +120,14 @@
   <data name="_appTitle" xml:space="preserve">
     <value>Puppy</value>
   </data>
+  <data name="_exitMenuHeader" xml:space="preserve">
+    <value>E_xit</value>
+  </data>
   <data name="_fileMenuHeader" xml:space="preserve">
-    <value>File</value>
+    <value>_File</value>
   </data>
   <data name="_helpMenuHeader" xml:space="preserve">
-    <value>Help</value>
+    <value>_Help</value>
   </data>
   <data name="_invalidRunOperationException" xml:space="preserve">
     <value>This method is not allowed. Use Run(RunstrapConfig) method instead.</value>

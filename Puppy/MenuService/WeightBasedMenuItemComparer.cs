@@ -1,11 +1,10 @@
 ﻿#region Usings
 
-using PuppyFramework.Models;
 using System.Collections.Generic;
 
 #endregion
 
-namespace PuppyFramework.Services
+namespace PuppyFramework.MenuService
 {
     public class WeightBasedMenuItemComparer : IComparer<MenuItemBase>
     {
