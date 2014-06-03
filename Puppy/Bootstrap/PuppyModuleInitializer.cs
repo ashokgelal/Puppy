@@ -33,7 +33,10 @@ namespace PuppyFramework.Bootstrap
             set
             {
                 _moduleLoader = value;
-                _loggerFacade.Log(string.Format("ModuleLoader {0} will be used to determine whether a module can be added or not", ModuleLoader.GetType().Name), Category.Info, Priority.Medium);
+                if (_moduleLoader != null)
+                {
+                    _loggerFacade.Log(string.Format("ModuleLoader {0} will be used to determine whether a module can be added or not", ModuleLoader.GetType().Name), Category.Info, Priority.Medium);
+                }
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.Windows.Input;
 using PuppyFramework.Interfaces;
 using System.ComponentModel.Composition;
 
@@ -16,6 +17,11 @@ namespace Puppy.Sample
         public IShellViewModel ViewModel
         {
             set { DataContext = value; }
+        }
+
+        public void AddGlobalKeyBinding(KeyBinding keyBinding)
+        {
+            InputBindings.Add(keyBinding);
         }
 
         #endregion
