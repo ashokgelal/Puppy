@@ -13,19 +13,22 @@ using System.Windows.Input;
 
 namespace PuppyFramework.MenuService
 {
-    [Export]
-    public class MainMenuViewModel : BindableBase
+    [Export(typeof(IMenuLoader))]
+    [Export(typeof(MainMenuViewModel))]
+    public class MainMenuViewModel : BindableBase, IMenuLoader
     {
         #region Fields
 
-        private readonly IMenuFactory _menuFactory;
         private readonly ILogger _logger;
+        private readonly IMenuFactory _menuFactory;
         private readonly IMenuRegisterService _registerService;
         private ObservableCollection<MenuItemBase> _menuItems;
 
         #endregion
 
         #region Properties
+
+        public bool IsLoaded { get; private set; }
 
         public ObservableCollection<MenuItemBase> MenuItems
         {
@@ -43,13 +46,18 @@ namespace PuppyFramework.MenuService
             _registerService = registerService;
             _menuFactory = menuFactory;
             _logger = logger;
-            AddMainMenuItems();
             _logger.Log("Initialized {ClassName:l}", Category.Info, null, GetType().FullName);
         }
 
         #endregion
 
         #region Methods
+
+        public void Load()
+        {
+            AddMainMenuItems();
+            IsLoaded = true;
+        }
 
         private void AddMainMenuItems()
         {

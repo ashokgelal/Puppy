@@ -14,13 +14,12 @@ namespace PuppyFramework.MenuService
 {
     [Export(typeof(IBootableService))]
     [Export(typeof(MenuLoader))]
-    public class MenuLoader : IBootableService, IPartImportsSatisfiedNotification
+    public class MenuLoader : IBootableService
     {
         #region Fields
 
         [ImportMany(AllowRecomposition = true), UsedImplicitly]
         private IEnumerable<Lazy<IMenuLoader>> _menuLoaders;
-        private BootstrapConfig _bootstrapConfig;
 
         #endregion
 
@@ -28,14 +27,7 @@ namespace PuppyFramework.MenuService
 
         public void Boot(BootstrapConfig bootstrapConfig)
         {
-            _bootstrapConfig = bootstrapConfig;
-        }
-
-        #endregion
-
-        public void OnImportsSatisfied()
-        {
-            if (_bootstrapConfig == null || !_bootstrapConfig.AddMainMenu)
+            if (bootstrapConfig == null || !bootstrapConfig.AddMainMenu)
             {
                 return;
             }
@@ -43,10 +35,12 @@ namespace PuppyFramework.MenuService
             {
                 return;
             }
-            foreach (var loader in _menuLoaders.Where(l=>!l.Value.IsLoaded))
+            foreach (var loader in _menuLoaders.Where(l => !l.Value.IsLoaded))
             {
                 loader.Value.Load();
             }
         }
+
+        #endregion
     }
 }

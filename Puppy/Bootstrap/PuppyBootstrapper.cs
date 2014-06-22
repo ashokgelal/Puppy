@@ -142,7 +142,6 @@ namespace PuppyFramework.Bootstrap
 
             BootstrapConfig.IsUsingCustomShellViewModel = customShellViewModel != null;
 
-            RunBootableServices();
 
             _logger.Log("Initialized shell {ClassName:l}", Category.Info, null, shell.GetType().FullName);
             shell.Show();
@@ -161,6 +160,12 @@ namespace PuppyFramework.Bootstrap
                 EnableUpdaterService = enableUpdater,
                 ModulesDirectory = modulesDirectory
             };
+        }
+
+        protected override void InitializeModules()
+        {
+            base.InitializeModules();
+            RunBootableServices();
         }
 
         private void RegisterDefaultServicesIfMissing()
