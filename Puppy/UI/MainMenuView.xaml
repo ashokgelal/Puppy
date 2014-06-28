@@ -23,7 +23,7 @@
 <!--                <Setter Property="Icon" Value="{Binding ItsIconUrl}" />-->
 <!--                <Setter Property="IsChecked" Value="{Binding ItsCheckedFlag}" />-->
 <!--                <Setter Property="IsCheckable" Value="{Binding ItsCheckableFlag}" />-->
-                <Setter Property="Height" Value="22" />
+                <Setter Property="Padding" Value="4 4 5 4" />
             </Style>
         </Grid.Resources>
 
