@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region Using
 
 using System;
 using System.Collections.Generic;
@@ -85,7 +85,25 @@ namespace PuppyFramework.Bootstrap
             Container.ComposeExportedValue<ILogger>(_logger);
             Container.ComposeExportedValue(BootstrapConfig);
             RegisterDefaultServicesIfMissing();
+            HookEvents();
             base.ConfigureContainer();
+        }
+
+        private void HookEvents()
+        {
+            Application.Current.Exit += Application_ExitEventHandler;
+        }
+
+        protected virtual void Application_ExitEventHandler(object sender, ExitEventArgs e)
+        {
+            _logger.Log("Application is closing. Disposing MEF Container.", Category.Info);
+            UnHookEvents();
+            Container.Dispose();
+        }
+
+        private void UnHookEvents()
+        {
+            Application.Current.Exit -= Application_ExitEventHandler;
         }
 
         protected override ILoggerFacade CreateLogger()
