@@ -19,9 +19,9 @@ namespace Puppy.Sample
             set { DataContext = value; }
         }
 
-        public void AddGlobalKeyBinding(KeyBinding keyBinding)
+        public void AddCommandBinding(CommandBinding binding)
         {
-            InputBindings.Add(keyBinding);
+            CommandBindings.Add(binding);
         }
 
         #endregion
