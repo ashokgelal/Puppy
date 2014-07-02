@@ -39,10 +39,10 @@ namespace PuppyFramework.UI
 
         #region Methods
 
-        public void AddGlobalKeyBinding(KeyBinding keyBinding)
+        public void AddCommandBinding(CommandBinding binding)
         {
-            keyBinding.EnsureParameterNotNull("keyBinding");
-            InputBindings.Add(keyBinding);
+            binding.EnsureParameterNotNull("binding");
+            CommandBindings.Add(binding);
         }
 
         public void SetCultureInfo(CultureInfo cultureInfo = null)

@@ -128,6 +128,7 @@
     <Compile Include="MenuService\MenuRegisterService.cs" />
     <Compile Include="Services\SerilogLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Commands.cs" />
     <Compile Include="UI\DefaultShell.xaml.cs">
       <DependentUpon>DefaultShell.xaml</DependentUpon>
     </Compile>

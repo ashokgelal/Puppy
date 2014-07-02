@@ -46,7 +46,7 @@ namespace PuppyFramework.Interfaces
 
         #region Methods
 
-        void AddGlobalKeyBinding(KeyBinding keyBinding);
+        void AddCommandBinding(CommandBinding binding);
 
         void Show();
 

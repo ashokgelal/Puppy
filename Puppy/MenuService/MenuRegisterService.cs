@@ -43,9 +43,9 @@ namespace PuppyFramework.MenuService
         private void AddKeyBindingIfAny(MenuItemBase menuItemToRegister)
         {
             var menuItem = menuItemToRegister as MenuItem;
-            if (menuItem != null && menuItem.GlobalKeyBinding != null)
+            if (menuItem != null && menuItem.CommandBinding != null)
             {
-                _shell.Value.AddGlobalKeyBinding(menuItem.GlobalKeyBinding);
+                _shell.Value.AddCommandBinding(menuItem.CommandBinding);
             }
         }
 

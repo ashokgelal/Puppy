@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region Using
 
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -19,11 +19,9 @@ namespace PuppyFramework.MenuService
 
         #region Properties
 
-        public ICommand Command { get; set; }
-
         public object CommandParamter { get; set; }
 
-        public KeyBinding GlobalKeyBinding { get; set; }
+        public CommandBinding CommandBinding { get; set; }
 
         public ObservableSortedList<MenuItemBase> Children
         {

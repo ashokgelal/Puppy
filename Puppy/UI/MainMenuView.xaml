@@ -18,7 +18,7 @@
 <!--                        Value="{Binding HiddenFlag, Converter={StaticResource _boolToVisiblityConverter}}" />-->
                 <Setter Property="Header" Value="{Binding Title}" />
                 <Setter Property="ItemsSource" Value="{Binding Children}" />
-                <Setter Property="Command" Value="{Binding Command}" />
+                <Setter Property="Command" Value="{Binding CommandBinding.Command}" />
                 <Setter Property="CommandParameter" Value="{Binding CommandParameter}" />
 <!--                <Setter Property="Icon" Value="{Binding ItsIconUrl}" />-->
 <!--                <Setter Property="IsChecked" Value="{Binding ItsCheckedFlag}" />-->
