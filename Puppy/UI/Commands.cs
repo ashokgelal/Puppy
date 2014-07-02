@@ -13,7 +13,6 @@ namespace PuppyFramework.UI
 
         static Commands()
         {
-            
             var exitGestures = new InputGestureCollection
             {
                 new KeyGesture(Key.F4, ModifierKeys.Alt, "Alt+F4")

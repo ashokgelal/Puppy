@@ -66,6 +66,7 @@ namespace PuppyFramework.MenuService
             var helpmenu = _menuFactory.MakeCoreMenuItem(CoreMenuItemType.Help);
 
             exitmenu.CommandBinding = new CommandBinding(Commands.ExitCommand, ExitCommandExecuted);
+            _registerService.Register(new SeparatorMenuItem(exitmenu.Weight - 0.1), filemenu);
             _registerService.Register(exitmenu, filemenu);
             _registerService.Register(helpmenu);
 
