@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region usings
 
 using System.Windows;
 using PuppyFramework.Bootstrap;
@@ -26,7 +26,10 @@ namespace Puppy.Sample
             // new CustomBootstrapper().Run(config);
 
             // ... OR if you want to load settings from App.config, just do
-             new PuppyBootstrapper().Run();
+            using (var bootstrapper = new PuppyBootstrapper())
+            {
+                bootstrapper.Run();
+            }
         }
 
         #endregion

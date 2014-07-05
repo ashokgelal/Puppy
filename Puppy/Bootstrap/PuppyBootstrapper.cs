@@ -1,4 +1,4 @@
-﻿#region Using
+﻿#region usings
 
 using System;
 using System.Collections.Generic;
@@ -23,12 +23,13 @@ using PuppyFramework.ViewModels;
 
 namespace PuppyFramework.Bootstrap
 {
-    public class PuppyBootstrapper : MefBootstrapper
+    public class PuppyBootstrapper : MefBootstrapper, IDisposable
     {
         #region Fields
 
         private readonly string _assemblyName;
         private readonly string _version;
+        private bool _isDisposed;
         protected SerilogLogger _logger;
 
         #endregion
@@ -85,25 +86,7 @@ namespace PuppyFramework.Bootstrap
             Container.ComposeExportedValue<ILogger>(_logger);
             Container.ComposeExportedValue(BootstrapConfig);
             RegisterDefaultServicesIfMissing();
-            HookEvents();
             base.ConfigureContainer();
-        }
-
-        private void HookEvents()
-        {
-            Application.Current.Exit += Application_ExitEventHandler;
-        }
-
-        protected virtual void Application_ExitEventHandler(object sender, ExitEventArgs e)
-        {
-            _logger.Log("Application is closing. Disposing MEF Container.", Category.Info);
-            UnHookEvents();
-            Container.Dispose();
-        }
-
-        private void UnHookEvents()
-        {
-            Application.Current.Exit -= Application_ExitEventHandler;
         }
 
         protected override ILoggerFacade CreateLogger()
@@ -173,11 +156,11 @@ namespace PuppyFramework.Bootstrap
             var modulesDirectory = GetAppSetting<string>(MagicStrings.Keys.ASK_MODULES_DIRECTORY);
             _logger.Log("Created BootstrapConfig from App.Config", Category.Info);
             return new BootstrapConfig
-            {
-                AddMainMenu = enableMenu,
-                EnableUpdaterService = enableUpdater,
-                ModulesDirectory = modulesDirectory
-            };
+                   {
+                       AddMainMenu = enableMenu,
+                       EnableUpdaterService = enableUpdater,
+                       ModulesDirectory = modulesDirectory
+                   };
         }
 
         protected override void InitializeModules()
@@ -225,6 +208,23 @@ namespace PuppyFramework.Bootstrap
             {
                 service.Boot(BootstrapConfig);
             }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        public virtual void Dispose(bool isForceDispose)
+        {
+            if (_isDisposed) return;
+            if (isForceDispose)
+            {
+                _logger.Log("Disposring Bootstrapper and disposing MEF Container.", Category.Info);
+                Container.Dispose();
+            }
+            _isDisposed = true;
         }
 
         #endregion

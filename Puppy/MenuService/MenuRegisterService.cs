@@ -1,12 +1,12 @@
-﻿#region Usings
+﻿#region usings
 
-using PuppyFramework.Helpers;
-using PuppyFramework.Interfaces;
-using PuppyFramework.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using PuppyFramework.Helpers;
+using PuppyFramework.Interfaces;
+using PuppyFramework.Services;
 
 #endregion
 
@@ -16,9 +16,8 @@ namespace PuppyFramework.MenuService
     {
         #region Fields
 
-        [Import(AllowRecomposition = true)]
-        private Lazy<IShell> _shell;
         private readonly IComparer<MenuItemBase> _menuItemComparer;
+        [Import(AllowRecomposition = true)] private Lazy<IShell> _shell;
 
         #endregion
 
@@ -40,13 +39,30 @@ namespace PuppyFramework.MenuService
 
         #region Methods
 
+        public bool Register(MenuItemBase menuItemToRegister, MenuItem attachToMenuItem)
+        {
+            menuItemToRegister.EnsureParameterNotNull("menuItemToRegister");
+            attachToMenuItem.EnsureParameterNotNull("attachToMenuItem");
+            attachToMenuItem.AddChild(menuItemToRegister, _menuItemComparer);
+            HideHalfOrphanSeparators(attachToMenuItem);
+            Register(attachToMenuItem);
+            AddKeyBindingIfAny(menuItemToRegister);
+            return true;
+        }
+
+        public bool Register(MenuItemBase menuItemToRegister)
+        {
+            menuItemToRegister.EnsureParameterNotNull("menuItemToRegister");
+            if (MenuItems.Contains(menuItemToRegister)) return false;
+            MenuItems.Add(menuItemToRegister);
+            return true;
+        }
+
         private void AddKeyBindingIfAny(MenuItemBase menuItemToRegister)
         {
             var menuItem = menuItemToRegister as MenuItem;
-            if (menuItem != null && menuItem.CommandBinding != null)
-            {
-                _shell.Value.AddCommandBinding(menuItem.CommandBinding);
-            }
+            if (_shell == null || menuItem == null || menuItem.CommandBinding == null) return;
+            _shell.Value.AddCommandBinding(menuItem.CommandBinding);
         }
 
         public bool Deregister(MenuItemBase menuItemToDeregister, MenuItem detachFrommenuItem)
@@ -74,25 +90,6 @@ namespace PuppyFramework.MenuService
             if (menuItem == null)
                 return;
             menuItem.HiddenFlag = false;
-        }
-
-        public bool Register(MenuItemBase menuItemToRegister, MenuItem attachToMenuItem)
-        {
-            menuItemToRegister.EnsureParameterNotNull("menuItemToRegister");
-            attachToMenuItem.EnsureParameterNotNull("attachToMenuItem");
-            attachToMenuItem.AddChild(menuItemToRegister, _menuItemComparer);
-            HideHalfOrphanSeparators(attachToMenuItem);
-            Register(attachToMenuItem);
-            AddKeyBindingIfAny(menuItemToRegister);
-            return true;
-        }
-
-        public bool Register(MenuItemBase menuItemToRegister)
-        {
-            menuItemToRegister.EnsureParameterNotNull("menuItemToRegister");
-            if (MenuItems.Contains(menuItemToRegister)) return false;
-            MenuItems.Add(menuItemToRegister);
-            return true;
         }
 
         #endregion
