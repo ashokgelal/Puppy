@@ -1,8 +1,8 @@
 ﻿#region Usings
 
+using NUnit.Framework;
 using PuppyFramework.Bootstrap;
 using System;
-using Xunit;
 
 #endregion
 
@@ -12,13 +12,13 @@ namespace Puppy.Tests.Bootstrap
     {
         #region Methods
 
-        [Fact]
+        [Test]
         public void TestDefaultRunMethod()
         {
             Assert.Throws<InvalidOperationException>(() => new TestBootstrapper().Run(true));
         }
 
-        [Fact]
+        [Test]
         public void TestRunWithCustomConfig()
         {
             var config = new BootstrapConfig
@@ -32,7 +32,7 @@ namespace Puppy.Tests.Bootstrap
             Assert.True(bootstrapper.BootstrapConfig.EnableUpdaterService);
         }
 
-        [Fact]
+        [Test]
         public void TestRunWithDefaultConfig()
         {
             var bootstrapper = new TestBootstrapper();

@@ -4,33 +4,35 @@ using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using NSubstitute;
+using NUnit.Framework;
 using PuppyFramework;
 using PuppyFramework.Interfaces;
 using PuppyFramework.Services;
 using PuppyFramework.ViewModels;
 using Serilog;
-using Xunit;
 
 #endregion
 
 namespace Puppy.Tests.ViewModels
 {
+    [TestFixture]
     public class PuppyShellViewModelTest
     {
-        private readonly SerilogLogger _logger;
+        private SerilogLogger _logger;
 
         #region Methods
 
-        public PuppyShellViewModelTest()
+	[SetUp]
+        public void Setup()
         {
             _logger = new SerilogLogger("Test", new LoggerConfiguration().WriteTo.Console());
         }
 
-        [Fact]
+        [Test]
         public async Task TestClosingCommand()
         {
             var applicationHandler = Substitute.For<IApplicationCloseHandler>();
-            applicationHandler.ShoulCloseApplicationAsync().Returns(Task.FromResult(UserPromptResult.Yes));
+            applicationHandler.ShoulCloseApplicationAsync().ReturnsForAnyArgs(info => Task.FromResult(UserPromptResult.Yes));
             var model = new DefaultShellViewModel(_logger)
             {
                 ApplicationCloseHandler = new Lazy<IApplicationCloseHandler>(() => applicationHandler)
@@ -39,7 +41,7 @@ namespace Puppy.Tests.ViewModels
             applicationHandler.Received(1).ShoulCloseApplicationAsync();
         }
 
-        [Fact]
+        [Test]
         public async Task TestClosingCommandCancel_NoApplicationHandler()
         {
             var model = new DefaultShellViewModel(_logger);
@@ -48,7 +50,7 @@ namespace Puppy.Tests.ViewModels
             Assert.False(cancelEventArgs.Cancel);
         }
 
-        [Fact]
+        [Test]
         public async Task TestClosingCommandCancel_WithApplicationHandler()
         {
             var applicationHandler = Substitute.For<IApplicationCloseHandler>();
@@ -62,7 +64,7 @@ namespace Puppy.Tests.ViewModels
             Assert.False(cancelEventArgs.Cancel);
         }
 
-        [Fact]
+        [Test]
         public async Task TestClosingCommandNoCancel_WithApplicationHandler()
         {
             var applicationHandler = Substitute.For<IApplicationCloseHandler>();
