@@ -1,9 +1,9 @@
-﻿#region Usings
+﻿#region usings
 
-using Microsoft.Practices.Prism.Logging;
-using PuppyFramework.Bootstrap;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Practices.Prism.Logging;
+using PuppyFramework.Bootstrap;
 
 #endregion
 
