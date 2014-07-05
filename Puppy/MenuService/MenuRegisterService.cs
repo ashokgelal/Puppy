@@ -17,7 +17,9 @@ namespace PuppyFramework.MenuService
         #region Fields
 
         private readonly IComparer<MenuItemBase> _menuItemComparer;
+#pragma warning disable 649
         [Import(AllowRecomposition = true)] private Lazy<IShell> _shell;
+#pragma warning restore 649
 
         #endregion
 

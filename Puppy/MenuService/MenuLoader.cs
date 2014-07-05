@@ -18,8 +18,10 @@ namespace PuppyFramework.MenuService
     {
         #region Fields
 
+#pragma warning disable 649
         [ImportMany(AllowRecomposition = true), UsedImplicitly]
         private IEnumerable<Lazy<IMenuLoader>> _menuLoaders;
+#pragma warning restore 649
 
         #endregion
 
