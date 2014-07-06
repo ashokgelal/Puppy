@@ -40,7 +40,7 @@
 
         <Menu Name="MainMenu"
               ItemContainerStyle="{StaticResource _menuItemContainerStyle}"
-              ItemsSource="{Binding MenuItems}" />
+              ItemsSource="{Binding MenuRegisterService.MenuItems}" />
     </Grid>
 
 </UserControl>

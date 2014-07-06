@@ -108,6 +108,7 @@
     <Compile Include="Helpers\IOHelpers.cs" />
     <Compile Include="Helpers\ObjectExtensions.cs" />
     <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="Helpers\UIHelpers.cs" />
     <Compile Include="Interfaces\MenuInterfaces.cs" />
     <Compile Include="Interfaces\PuppyInterfaces.cs" />

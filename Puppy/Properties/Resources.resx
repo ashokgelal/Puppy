@@ -120,11 +120,17 @@
   <data name="_appTitle" xml:space="preserve">
     <value>Puppy</value>
   </data>
+  <data name="_editMenuHeader" xml:space="preserve">
+    <value>_Edit</value>
+  </data>
   <data name="_exitMenuHeader" xml:space="preserve">
     <value>E_xit</value>
   </data>
   <data name="_fileMenuHeader" xml:space="preserve">
     <value>_File</value>
+  </data>
+  <data name="_formatMenuHeader" xml:space="preserve">
+    <value>F_ormat</value>
   </data>
   <data name="_helpMenuHeader" xml:space="preserve">
     <value>_Help</value>

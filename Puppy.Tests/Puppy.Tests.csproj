@@ -123,6 +123,7 @@
     <Compile Include="Bootstrap\BootstrapperTest.cs" />
     <Compile Include="Bootstrap\TestBootstrapper.cs" />
     <Compile Include="Helpers\IOHelpersTests.cs" />
+    <Compile Include="Helpers\StringHelpersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\PuppyShellViewModelTest.cs" />
   </ItemGroup>

@@ -216,10 +216,10 @@ namespace PuppyFramework.Bootstrap
             GC.SuppressFinalize(this);
         }
 
-        public virtual void Dispose(bool isForceDispose)
+        public virtual void Dispose(bool isManualDispose)
         {
             if (_isDisposed) return;
-            if (isForceDispose)
+            if (isManualDispose)
             {
                 _logger.Log("Disposring Bootstrapper and disposing MEF Container.", Category.Info);
                 Container.Dispose();

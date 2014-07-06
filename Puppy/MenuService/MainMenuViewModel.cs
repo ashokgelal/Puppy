@@ -1,6 +1,5 @@
 ﻿#region Using
 
-using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Input;
@@ -21,8 +20,6 @@ namespace PuppyFramework.MenuService
 
         private readonly ILogger _logger;
         private readonly IMenuFactory _menuFactory;
-        private readonly IMenuRegisterService _registerService;
-        private ObservableCollection<MenuItemBase> _menuItems;
 
         #endregion
 
@@ -30,11 +27,7 @@ namespace PuppyFramework.MenuService
 
         public bool IsLoaded { get; private set; }
 
-        public ObservableCollection<MenuItemBase> MenuItems
-        {
-            get { return _menuItems; }
-            set { SetProperty(ref _menuItems, value); }
-        }
+        public IMenuRegisterService MenuRegisterService { get; set; }
 
         #endregion
 
@@ -43,7 +36,7 @@ namespace PuppyFramework.MenuService
         [ImportingConstructor]
         public MainMenuViewModel(IMenuRegisterService registerService, IMenuFactory menuFactory, ILogger logger)
         {
-            _registerService = registerService;
+            MenuRegisterService = registerService;
             _menuFactory = menuFactory;
             _logger = logger;
             _logger.Log("Initialized {ClassName:l}", Category.Info, null, GetType().FullName);
@@ -66,11 +59,9 @@ namespace PuppyFramework.MenuService
             var helpmenu = _menuFactory.MakeCoreMenuItem(CoreMenuItemType.Help);
 
             exitmenu.CommandBinding = new CommandBinding(Commands.ExitCommand, ExitCommandExecuted);
-            _registerService.Register(new SeparatorMenuItem(exitmenu.Weight - 0.1), filemenu);
-            _registerService.Register(exitmenu, filemenu);
-            _registerService.Register(helpmenu);
-
-            MenuItems = new ObservableCollection<MenuItemBase>(_registerService.MenuItems);
+            MenuRegisterService.Register(new SeparatorMenuItem(exitmenu.Weight - 0.1), filemenu);
+            MenuRegisterService.Register(exitmenu, filemenu);
+            MenuRegisterService.Register(helpmenu);
         }
 
         private void ExitCommandExecuted(object sender, ExecutedRoutedEventArgs e)

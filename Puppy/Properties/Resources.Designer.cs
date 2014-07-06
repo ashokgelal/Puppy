@@ -70,6 +70,15 @@ namespace PuppyFramework.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Edit.
+        /// </summary>
+        internal static string _editMenuHeader {
+            get {
+                return ResourceManager.GetString("_editMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E_xit.
         /// </summary>
         internal static string _exitMenuHeader {
@@ -84,6 +93,15 @@ namespace PuppyFramework.Properties {
         internal static string _fileMenuHeader {
             get {
                 return ResourceManager.GetString("_fileMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F_ormat.
+        /// </summary>
+        internal static string _formatMenuHeader {
+            get {
+                return ResourceManager.GetString("_formatMenuHeader", resourceCulture);
             }
         }
         

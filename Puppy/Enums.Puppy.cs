@@ -12,6 +12,7 @@
         File = 0,
         Edit = 10,
         View = 20,
+        Format = 30,
         Help = 100,
         Exit = 1000
     }
