@@ -19,7 +19,7 @@ namespace PuppyFramework.MenuService
 
         #region Properties
 
-        public object CommandParamter { get; set; }
+        public object CommandParameter { get; set; }
 
         public CommandBinding CommandBinding { get; set; }
 
