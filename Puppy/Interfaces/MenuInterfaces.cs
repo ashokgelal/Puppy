@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.Collections.Generic;
 using PuppyFramework.MenuService;
 using PuppyFramework.Services;
 
@@ -43,6 +44,7 @@ namespace PuppyFramework.Interfaces
 
         bool Register(MenuItemBase menuItemToRegister, MenuItem attachToMenuItem);
 
+        bool Register(IEnumerable<MenuItemBase> menuItemsToRegister, MenuItem attachToMenuItem);
         bool Register(MenuItemBase menuItemToRegister);
 
         #endregion

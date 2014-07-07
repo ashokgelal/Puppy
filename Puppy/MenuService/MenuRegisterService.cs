@@ -52,6 +52,22 @@ namespace PuppyFramework.MenuService
             return true;
         }
 
+        public bool Register(IEnumerable<MenuItemBase> menuItemsToRegister, MenuItem attachToMenuItem)
+        {
+            menuItemsToRegister.EnsureParameterNotNull("menuItemsToRegister");
+            attachToMenuItem.EnsureParameterNotNull("attachToMenuItem");
+            foreach (var menuItemToRegister in menuItemsToRegister)
+            {
+                attachToMenuItem.AddChild(menuItemToRegister, _menuItemComparer);
+		AddKeyBindingIfAny(menuItemToRegister);
+            }
+
+            HideHalfOrphanSeparators(attachToMenuItem);
+            Register(attachToMenuItem);
+
+            return true;
+        }
+
         public bool Register(MenuItemBase menuItemToRegister)
         {
             menuItemToRegister.EnsureParameterNotNull("menuItemToRegister");
