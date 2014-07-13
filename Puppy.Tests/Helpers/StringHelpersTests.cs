@@ -28,5 +28,27 @@ namespace Puppy.Tests.Helpers
         {
             Assert.AreEqual("foobar…", "foobar".Ellipsize());
         }
+
+        [Test]
+        public void EmptyStringIsValidHttpTest()
+        {
+           Assert.IsFalse(string.Empty.IsValidHttpUrl()); 
+           Assert.IsFalse(StringHelpers.IsValidHttpUrl(null)); 
+        }
+
+        [Test]
+        public void StringIsInValidHttpTest()
+        {
+            Assert.IsFalse("not/a/url".IsValidHttpUrl());
+            Assert.IsFalse("file://not/apath".IsValidHttpUrl());
+        }
+
+        [Test]
+        public void StringIsValidHttpTest()
+        {
+            Assert.IsTrue("https://google.com".IsValidHttpUrl());
+            Assert.IsTrue("http://google.com/doodle".IsValidHttpUrl());
+            Assert.IsTrue("http://google.com/doodle.html".IsValidHttpUrl());
+        }
     }
 }
