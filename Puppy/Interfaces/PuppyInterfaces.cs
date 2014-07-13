@@ -1,4 +1,4 @@
-﻿#region usings
+﻿#region Using
 
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -55,5 +55,16 @@ namespace PuppyFramework.Interfaces
 
     public interface IShellViewModel
     {
+    }
+
+    public interface ISettingsAccessor
+    {
+        #region Methods
+
+        T ReadDefaultSetting<T>(string key);
+        void WriteDefaultSetting<T>(string key, T value);
+        void Save();
+
+        #endregion
     }
 }

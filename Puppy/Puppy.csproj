@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="Services\ObservableSortedList.cs" />
     <Compile Include="MenuService\DefaultMenuFactory.cs" />
+    <Compile Include="Services\SettingsAccessorBase.cs" />
     <Compile Include="Services\UIComposer.cs" />
     <Compile Include="MenuService\WeightBasedMenuItemComparer.cs" />
     <Compile Include="MenuService\MenuRegisterService.cs" />
