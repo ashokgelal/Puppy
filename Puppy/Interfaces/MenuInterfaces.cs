@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region usings
 
 using System.Collections.Generic;
 using PuppyFramework.MenuService;
@@ -42,10 +42,9 @@ namespace PuppyFramework.Interfaces
 
         #region Methods
 
-        bool Register(MenuItemBase menuItemToRegister, MenuItem attachToMenuItem);
-
-        bool Register(IEnumerable<MenuItemBase> menuItemsToRegister, MenuItem attachToMenuItem);
-        bool Register(MenuItemBase menuItemToRegister);
+        bool Register(MenuItemBase menuItemToRegister, MenuItem attachToMenuItem, bool addToTopLevel = true);
+        bool Register(IEnumerable<MenuItemBase> menuItemsToRegister, MenuItem attachToMenuItem, bool addToTopLevel = true);
+        bool Register(MenuItemBase menuItemToRegister, bool addToTopLevel = true);
 
         #endregion
     }

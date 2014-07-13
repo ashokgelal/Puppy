@@ -41,37 +41,36 @@ namespace PuppyFramework.MenuService
 
         #region Methods
 
-        public bool Register(MenuItemBase menuItemToRegister, MenuItem attachToMenuItem)
+        public bool Register(MenuItemBase menuItemToRegister, MenuItem attachToMenuItem, bool addToTopLevel = true)
         {
             menuItemToRegister.EnsureParameterNotNull("menuItemToRegister");
             attachToMenuItem.EnsureParameterNotNull("attachToMenuItem");
             attachToMenuItem.AddChild(menuItemToRegister, _menuItemComparer);
             HideHalfOrphanSeparators(attachToMenuItem);
-            Register(attachToMenuItem);
+            Register(attachToMenuItem, addToTopLevel);
             AddKeyBindingIfAny(menuItemToRegister);
             return true;
         }
 
-        public bool Register(IEnumerable<MenuItemBase> menuItemsToRegister, MenuItem attachToMenuItem)
+        public bool Register(IEnumerable<MenuItemBase> menuItemsToRegister, MenuItem attachToMenuItem, bool addToTopLevel = true)
         {
             menuItemsToRegister.EnsureParameterNotNull("menuItemsToRegister");
             attachToMenuItem.EnsureParameterNotNull("attachToMenuItem");
             foreach (var menuItemToRegister in menuItemsToRegister)
             {
                 attachToMenuItem.AddChild(menuItemToRegister, _menuItemComparer);
-		AddKeyBindingIfAny(menuItemToRegister);
+                AddKeyBindingIfAny(menuItemToRegister);
             }
 
             HideHalfOrphanSeparators(attachToMenuItem);
-            Register(attachToMenuItem);
-
+            Register(attachToMenuItem, addToTopLevel);
             return true;
         }
 
-        public bool Register(MenuItemBase menuItemToRegister)
+        public bool Register(MenuItemBase menuItemToRegister, bool addToTopLevel = true)
         {
             menuItemToRegister.EnsureParameterNotNull("menuItemToRegister");
-            if (MenuItems.Contains(menuItemToRegister)) return false;
+            if (!addToTopLevel || MenuItems.Contains(menuItemToRegister)) return false;
             MenuItems.Add(menuItemToRegister);
             return true;
         }
