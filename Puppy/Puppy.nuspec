@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Puppy</id>
+        <version>0.0.1</version>
+        <authors>Ashok Gelal</authors>
+        <projectUrl>https://github.com/ashokgelal/Puppy</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>An opinionated cute little framework for bootstrapping Prism and MEF based WPF desktop apps.</description>
+        <copyright>Ashok Gelal</copyright>
+        <dependencies>
+            <dependency id="Prism.MEFExtensions" version="5.0.0" />
+            <dependency id="Serilog" version="1.3.34" />
+            <dependency id="Serilog.Extras.AppSettings" version="1.3.34" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\PuppyFramework.dll" target="lib\PuppyFramework.dll" />
+        <file src="bin\Release\System.Windows.Interactivity.dll" target="lib\System.Windows.Interactivity.dll" />
+    </files>
+</package>
