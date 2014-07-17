@@ -94,19 +94,19 @@ namespace PuppyFramework.MenuService
             parentMenuItem.EnsureParameterNotNull("parentMenuItem");
             var separators = parentMenuItem.Children.OfType<SeparatorMenuItem>().ToList();
             // turn on the visibility and afterwards selectively turn it off
-            separators.ForEach(sep => sep.HiddenFlag = true);
+            separators.ForEach(sep => sep.IsHidden = true);
 
             // hide top separator
             var menuItem = separators.FirstOrDefault();
             if (menuItem == null)
                 return;
-            menuItem.HiddenFlag = false;
+            menuItem.IsHidden = false;
 
             // hide bottom separator
             menuItem = separators.LastOrDefault();
             if (menuItem == null)
                 return;
-            menuItem.HiddenFlag = false;
+            menuItem.IsHidden = false;
         }
 
         #endregion

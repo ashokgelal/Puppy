@@ -150,6 +150,9 @@
   <data name="_parameterNullException" xml:space="preserve">
     <value>Parameter can't be null. {0} Called from: Line #{1} {2} in {3</value>
   </data>
+  <data name="_recentFilesMenuHeader" xml:space="preserve">
+    <value>Open Recent</value>
+  </data>
   <data name="_valueNullExceptionPattern" xml:space="preserve">
     <value>{0} Called from: Line #{1} {2} in {3}</value>
   </data>

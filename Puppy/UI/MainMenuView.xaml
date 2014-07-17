@@ -18,6 +18,7 @@
                 <Setter Property="Command" Value="{Binding CommandBinding.Command}" />
                 <Setter Property="CommandParameter" Value="{Binding CommandParameter}" />
                 <Setter Property="Padding" Value="4 4 5 4" />
+                <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding ItsSeparatorFlag}" Value="True" d:DataContext="{d:DesignInstance menuService:SeparatorMenuItem}">
                         <Setter Property="Padding" Value="0" />

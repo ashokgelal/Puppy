@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region Using
 
 using Microsoft.Practices.Prism.Mvvm;
 
@@ -10,17 +10,17 @@ namespace PuppyFramework.MenuService
     {
         #region Fields
 
-        private bool _hiddenFlag;
+        private bool _isHidden;
         private double _weight;
 
         #endregion
 
         #region Properties
 
-        public bool HiddenFlag
+        public bool IsHidden
         {
-            get { return _hiddenFlag; }
-            set { SetProperty(ref _hiddenFlag, value); }
+            get { return _isHidden; }
+            set { SetProperty(ref _isHidden, value); }
         }
 
         public double Weight

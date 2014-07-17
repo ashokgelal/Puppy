@@ -13,6 +13,7 @@ namespace PuppyFramework.MenuService
         #region Fields
 
         private ObservableSortedList<MenuItemBase> _children;
+        private bool _isEnabled;
         private string _title;
 
         #endregion
@@ -35,6 +36,12 @@ namespace PuppyFramework.MenuService
             protected set { SetProperty(ref _title, value); }
         }
 
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set { SetProperty(ref _isEnabled, value); }
+        }
+
         #endregion
 
         #region Constructors
@@ -44,7 +51,8 @@ namespace PuppyFramework.MenuService
         {
             Title = title;
             Children = new ObservableSortedList<MenuItemBase>();
-            HiddenFlag = false;
+            IsHidden = false;
+            IsEnabled = true;
         }
 
         #endregion

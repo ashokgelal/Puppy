@@ -160,6 +160,15 @@ namespace PuppyFramework.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Recent.
+        /// </summary>
+        internal static string _recentFilesMenuHeader {
+            get {
+                return ResourceManager.GetString("_recentFilesMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Called from: Line #{1} {2} in {3}.
         /// </summary>
         internal static string _valueNullExceptionPattern {
