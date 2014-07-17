@@ -118,14 +118,22 @@
     <Compile Include="MenuService\MenuItemBase.cs" />
     <Compile Include="MenuService\MenuLoader.cs" />
     <Compile Include="MenuService\SeparatorMenuItem.cs" />
+    <Compile Include="Models\RecentFileInfo.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Services\ObservableSortedList.cs" />
     <Compile Include="MenuService\DefaultMenuFactory.cs" />
+    <Compile Include="Services\PuppySettingsAccessor.cs" />
+    <Compile Include="Services\RecentFilesManager.cs" />
     <Compile Include="Services\SettingsAccessorBase.cs" />
     <Compile Include="Services\UIComposer.cs" />
     <Compile Include="MenuService\WeightBasedMenuItemComparer.cs" />
@@ -144,6 +152,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.ne-NP.resx" />

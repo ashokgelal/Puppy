@@ -1,6 +1,7 @@
 ﻿#region Using
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Configuration;
 using System.Diagnostics;
 using PuppyFramework.Interfaces;
@@ -9,6 +10,7 @@ using PuppyFramework.Interfaces;
 
 namespace PuppyFramework.Services
 {
+    [InheritedExport]
     public abstract class SettingsAccessorBase : ISettingsAccessor
     {
         #region Fields

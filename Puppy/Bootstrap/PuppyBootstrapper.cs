@@ -1,4 +1,4 @@
-﻿#region usings
+﻿#region Using
 
 using System;
 using System.Collections.Generic;
@@ -52,6 +52,12 @@ namespace PuppyFramework.Bootstrap
         #endregion
 
         #region Methods
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
         protected override IModuleCatalog CreateModuleCatalog()
         {
@@ -143,7 +149,6 @@ namespace PuppyFramework.Bootstrap
 
             BootstrapConfig.IsUsingCustomShellViewModel = customShellViewModel != null;
 
-
             _logger.Log("Initialized shell {ClassName:l}", Category.Info, null, shell.GetType().FullName);
             shell.Show();
             _logger.Log("Showing shell {ClassName:l}", Category.Info, null, shell.GetType().FullName);
@@ -156,11 +161,11 @@ namespace PuppyFramework.Bootstrap
             var modulesDirectory = GetAppSetting<string>(MagicStrings.Keys.ASK_MODULES_DIRECTORY);
             _logger.Log("Created BootstrapConfig from App.Config", Category.Info);
             return new BootstrapConfig
-                   {
-                       AddMainMenu = enableMenu,
-                       EnableUpdaterService = enableUpdater,
-                       ModulesDirectory = modulesDirectory
-                   };
+            {
+                AddMainMenu = enableMenu,
+                EnableUpdaterService = enableUpdater,
+                ModulesDirectory = modulesDirectory
+            };
         }
 
         protected override void InitializeModules()
@@ -210,19 +215,18 @@ namespace PuppyFramework.Bootstrap
             }
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
         public virtual void Dispose(bool isManualDispose)
         {
             if (_isDisposed) return;
             if (isManualDispose)
             {
-                _logger.Log("Disposring Bootstrapper and disposing MEF Container.", Category.Info);
+                _logger.Log("Disposing Bootstrapper and disposing MEF Container.", Category.Info);
+                var settingAccessors = Container.GetExportedValues<SettingsAccessorBase>();
                 Container.Dispose();
+                foreach (var settingsAccessor in settingAccessors)
+                {
+                    settingsAccessor.Save();
+                }
             }
             _isDisposed = true;
         }
