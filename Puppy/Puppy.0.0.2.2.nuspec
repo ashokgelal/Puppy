@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Puppy</id>
-        <version>0.0.2</version>
+        <version>0.0.2.2</version>
         <authors>Ashok Gelal</authors>
         <projectUrl>https://github.com/ashokgelal/Puppy</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
