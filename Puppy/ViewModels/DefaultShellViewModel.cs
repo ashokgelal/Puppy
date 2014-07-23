@@ -68,7 +68,7 @@ namespace PuppyFramework.ViewModels
         protected virtual async void HandleAppClosingCommandAsync(CancelEventArgs args)
         {
             args.Cancel = true;
-            var canClose = ApplicationCloseHandler == null || await ApplicationCloseHandler.Value.ShoulCloseApplicationAsync() == UserPromptResult.Yes;
+            var canClose = ApplicationCloseHandler == null || await ApplicationCloseHandler.Value.ShouldCloseApplicationAsync() == UserPromptResult.Yes;
             _logger.Log("Handling AppClosingCommand. Can close? {CanCloseApp:l}", Category.Info, null, canClose);
             args.Cancel = !canClose;
             if (canClose)

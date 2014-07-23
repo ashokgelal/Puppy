@@ -13,7 +13,7 @@ namespace PuppyFramework.Interfaces
     {
         #region Methods
 
-        Task<UserPromptResult> ShoulCloseApplicationAsync();
+        Task<UserPromptResult> ShouldCloseApplicationAsync();
 
         #endregion
     }

@@ -32,13 +32,13 @@ namespace Puppy.Tests.ViewModels
         public async Task TestClosingCommand()
         {
             var applicationHandler = Substitute.For<IApplicationCloseHandler>();
-            applicationHandler.ShoulCloseApplicationAsync().ReturnsForAnyArgs(info => Task.FromResult(UserPromptResult.Yes));
+            applicationHandler.ShouldCloseApplicationAsync().ReturnsForAnyArgs(info => Task.FromResult(UserPromptResult.Yes));
             var model = new DefaultShellViewModel(_logger)
             {
                 ApplicationCloseHandler = new Lazy<IApplicationCloseHandler>(() => applicationHandler)
             };
             await model.AppClosingCommand.Execute(new CancelEventArgs());
-            applicationHandler.Received(1).ShoulCloseApplicationAsync();
+            applicationHandler.Received(1).ShouldCloseApplicationAsync();
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Puppy.Tests.ViewModels
         public async Task TestClosingCommandCancel_WithApplicationHandler()
         {
             var applicationHandler = Substitute.For<IApplicationCloseHandler>();
-            applicationHandler.ShoulCloseApplicationAsync().Returns(Task.FromResult(UserPromptResult.Yes));
+            applicationHandler.ShouldCloseApplicationAsync().Returns(Task.FromResult(UserPromptResult.Yes));
             var model = new DefaultShellViewModel(_logger)
             {
                 ApplicationCloseHandler = new Lazy<IApplicationCloseHandler>(() => applicationHandler)
@@ -68,7 +68,7 @@ namespace Puppy.Tests.ViewModels
         public async Task TestClosingCommandNoCancel_WithApplicationHandler()
         {
             var applicationHandler = Substitute.For<IApplicationCloseHandler>();
-            applicationHandler.ShoulCloseApplicationAsync().Returns(Task.FromResult(UserPromptResult.No));
+            applicationHandler.ShouldCloseApplicationAsync().Returns(Task.FromResult(UserPromptResult.No));
             var model = new DefaultShellViewModel(_logger)
             {
                 ApplicationCloseHandler = new Lazy<IApplicationCloseHandler>(() => applicationHandler)
