@@ -6,7 +6,6 @@ using System.Collections.Specialized;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using PuppyFramework.Interfaces;
@@ -150,7 +149,6 @@ namespace PuppyFramework.Services
         {
             if (!File.Exists(fileName))
             {
-                HandleMissingFile(fileName);
                 return false;
             }
             SetupTempFileList();
@@ -167,18 +165,10 @@ namespace PuppyFramework.Services
             CreateRecentFilesMenuItems();
         }
 
-        public void HandleMissingFile(string fileName)
+        public void RemoveMissingFile(RecentFileInfo fileInfo)
         {
-            var messageString = "_missingRecentFileMessage";
-            var messageTitle = "_missingRecentFileTitle";
-            var response = MessageBox.Show(
-                string.Format(messageString.Replace("\\r\\n", Environment.NewLine), fileName),
-                messageTitle, MessageBoxButton.YesNo);
-
-            if (response != MessageBoxResult.Yes) return;
-
             SetupTempFileList();
-            RemoveFileFromList(fileName);
+            RemoveFileFromList(fileInfo.Uri.LocalPath);
             ResetRecentFilesList();
             ResetRecentMenuItems();
         }
